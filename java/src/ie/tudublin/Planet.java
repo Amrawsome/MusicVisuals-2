@@ -4,19 +4,17 @@ import processing.core.PApplet;
 
 public class Planet extends PApplet{
 
-    float radius;
-    float angle;
-    float distance;
-
-    Planet(float radius, float distance)
-    {
-       this.radius = radius;
-       this.distance = distance;
-       angle = 0;
+    
+    public Planet() {
+        
     }
 
-    void show()
+    public void drawPlanet()
     {
-        ellipse(0, 0, radius*2, radius*2);
+        background(0);
+        lights();
+        translate(width/2, height/2);
+        sphere(200);
     }
-} 
+
+}
