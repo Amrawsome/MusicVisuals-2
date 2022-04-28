@@ -16,12 +16,18 @@ public class Main
 	public void assignment()
 	{
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new D21125383.assignment());		
+        processing.core.PApplet.runSketch( a, new Assignment());		
 	}
+
+	public static void sceneR()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new sceneR());		
+	}
+
 	public static void main(String[] args)
 	{
-		Main main = new Main();
-		main.assignment();			
+		sceneR();			
 	}
 
 	
