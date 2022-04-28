@@ -1,13 +1,22 @@
 package ie.tudublin;
 
-import processing.core.PVector;
+import processing.core.PApplet;
 
-public class Planet {
+public class Planet extends PApplet{
 
-    PVector position;
+    float radius;
+    float angle;
+    float distance;
 
-    Planet(float x, float y)
+    Planet(float radius, float distance)
     {
-        position = new PVector(x, y);
+       this.radius = radius;
+       this.distance = distance;
+       angle = 0;
     }
-}
+
+    void show()
+    {
+        ellipse(0, 0, radius*2, radius*2);
+    }
+} 

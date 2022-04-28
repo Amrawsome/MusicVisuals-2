@@ -25,6 +25,12 @@ public class Main
         processing.core.PApplet.runSketch( a, new sceneR());		
 	}
 
+	public static void Planet()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new sceneR());		
+	}
+
 	public static void main(String[] args)
 	{
 		sceneR();			

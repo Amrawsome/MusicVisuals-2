@@ -14,6 +14,8 @@ public class sceneR extends PApplet{
     AudioInput audioInput;
     AudioBuffer audioBuffer;
 
+    Planet Mars;
+
     // pause/play key
     int mode = 0;
 
@@ -47,6 +49,7 @@ public class sceneR extends PApplet{
 
     public void setup()
     {
+        Mars = new Planet(0, 100);
         minim = new Minim(this);
         // Uncomment this to use the microphone
         // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
@@ -94,8 +97,17 @@ public class sceneR extends PApplet{
                     stroke(c, 255, 255);
                     float f = lerpedBuffer[i] * halfH * 4.0f;
                     fill(0);
-                    circle(i+f, halfH-f ,50);                    
+                    circle(i+f, halfH-f ,50);
+                    
+                    
                 }
+                break;
+            }
+
+            case 1:
+            {
+                translate(cx, cy);
+                Mars.show();
                 break;
             }
         }
