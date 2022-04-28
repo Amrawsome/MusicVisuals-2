@@ -70,7 +70,7 @@ public class sceneR extends PApplet{
 
     public void draw()
     {
-        //background(0);
+        background(0);
         float halfH = height / 2;
         float average = 0;
         float sum = 0;
@@ -90,7 +90,7 @@ public class sceneR extends PApplet{
 			case 0:
             {
                 background(0);
-                //planet.drawPlanet();
+                
                 for(int i = 0 ; i < audioBuffer.size() ; i ++)
                 {
                     
@@ -102,7 +102,6 @@ public class sceneR extends PApplet{
                     float f = lerpedBuffer[i] * halfH * 4.0f;
                     noFill();
                     float backgroundH = map(f, -1, 1, 0, height);
-                    float backgroundW = map(f, -1, 1, 0, width);
                     circle(width - i*2, backgroundH, 10);
                     circle(f, i, 50+f);
                     circle(width-f, i, 50+f);
