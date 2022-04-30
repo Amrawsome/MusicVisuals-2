@@ -90,18 +90,18 @@ public class sceneR extends PApplet{
         lerpedBuffer = new float[width];
     }
     
-    void drawCube() { 
+    void drawCube(float f, float g, float size) { 
         float c = map(20, 0, audioBuffer.size(), 0, 255);
         stroke(204, 102, c);
-        fill(c);
+        
         cube.beginDraw();
         cube.lights();
         cube.background(0);
-        //cube.noStroke();
-        cube.translate(mouseX, mouseY);
+        cube.noStroke();
+        cube.translate(f, g);
         cube.rotateY((float) (frameCount/100.0));
         cube.rotateX((float) (frameCount/50.0));
-        cube.box(300);
+        cube.box(size);
         cube.endDraw();
       }
 
@@ -109,8 +109,10 @@ public class sceneR extends PApplet{
     {
         //background(0);
         float halfH = height / 2;
+        float widthH = width / 2;
         float average = 0;
         float sum = 0;
+        int size = 300;
         off += 1;
         // Calculate sum and average of the samples
         // Also lerp each element of buffer;
@@ -121,30 +123,45 @@ public class sceneR extends PApplet{
         }
         average= sum / (float) audioBuffer.size();
 
-        smoothedAmplitude = lerp(smoothedAmplitude, average, 0.1f);
+        smoothedAmplitude = lerp(smoothedAmplitude, average, 0.01f);
 
         switch (mode) {
 			case 0:
             {
                 background(0); 
-                drawCube();
+                drawCube(widthH+200, halfH, size);
                 image(cube, 0, 0);
-
                             
                 for(int i = 0 ; i < audioBuffer.size() ; i ++)
                 {
                     
                     
                     float c = map(i, 0, audioBuffer.size(), 0, 255);
-                    stroke(204, 102, c);
+                    //stroke(204, 102, c);
                     
-
+                    noStroke();
                     float f = lerpedBuffer[i] * halfH * 4.0f;
                     noFill();
                     float backgroundH = map(f, -1, 1, 0, height);
-                    circle(width - i*2, backgroundH, 10);
-                    circle(f, i, 50+f);
-                    circle(width-f, i, 50+f);
+                    
+                    //circle(width - i*2, backgroundH, 10);
+
+                    if (f > 150)
+                    {
+                        f = 50;
+                    }
+
+                    if (c > 255)
+                    {
+                        c -= 100;
+                    }
+                    
+                    rotate(c);
+                    fill(204, 102, c);
+                    circle(f, i, f);
+                    circle(width-f, i, f);
+
+                    size -= 50;
 
                     
                     
