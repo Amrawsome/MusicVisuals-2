@@ -9,6 +9,7 @@ import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import processing.core.PApplet;
+import processing.core.PGraphics;
 
 public class sceneR extends PApplet{
     
@@ -20,6 +21,7 @@ public class sceneR extends PApplet{
 
     Planet planet;
 
+    PGraphics cube;
 
     // pause/play key
     int mode = 0;
@@ -45,9 +47,28 @@ public class sceneR extends PApplet{
         }
 	}
 
+    public void drawPlanet()
+    {
+        background(0);
+        lights();
+        translate(width/2, height/2);
+        sphere(200);
+
+        
+        /*
+        pushMatrix();
+        fill(0);
+        translate(-25, (float) -12.5, 76);
+        sphere(35);
+        popMatrix();
+
+        */
+    }
+
     public void settings()
     {
         //size(600, 600 , P3D);
+        //size(1000,700,P3D);
         fullScreen(P3D, SPAN);
     }
 
@@ -56,6 +77,7 @@ public class sceneR extends PApplet{
     public void setup()
     {
         
+        cube = createGraphics(width, height, P3D);
         minim = new Minim(this);
         audioPlayer = minim.loadFile("Heaven.mp3", 1024);
         audioPlayer.play();
@@ -67,10 +89,25 @@ public class sceneR extends PApplet{
 
         lerpedBuffer = new float[width];
     }
+    
+    void drawCube() { 
+        float c = map(20, 0, audioBuffer.size(), 0, 255);
+        stroke(204, 102, c);
+        fill(c);
+        cube.beginDraw();
+        cube.lights();
+        cube.background(0);
+        //cube.noStroke();
+        cube.translate(mouseX, mouseY);
+        cube.rotateY((float) (frameCount/100.0));
+        cube.rotateX((float) (frameCount/50.0));
+        cube.box(300);
+        cube.endDraw();
+      }
 
     public void draw()
     {
-        background(0);
+        //background(0);
         float halfH = height / 2;
         float average = 0;
         float sum = 0;
@@ -89,8 +126,11 @@ public class sceneR extends PApplet{
         switch (mode) {
 			case 0:
             {
-                background(0);
-                
+                background(0); 
+                drawCube();
+                image(cube, 0, 0);
+
+                            
                 for(int i = 0 ; i < audioBuffer.size() ; i ++)
                 {
                     
@@ -109,8 +149,9 @@ public class sceneR extends PApplet{
                     
                     
                 }
-
                 
+                
+                //drawPlanet();
                 //Mars.show();
                 
                 break;
