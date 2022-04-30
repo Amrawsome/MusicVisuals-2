@@ -1,24 +1,44 @@
 package D21125383;
+import org.w3c.dom.ranges.RangeException;
+
 import processing.core.PApplet;
-import ie.tudublin.Visual;
+import processing.core.PVector;
+
 public class assignment extends PApplet {
+    PVector location;
+    PVector velocity;
+
     public void settings(){
-        size(500, 500);
-        
+        size(800, 200);
+        smooth();
+      
         }
         
         public void setup(){
-        background(0);
-        noFill();
+        background(255);
+        location = new PVector(width/2, height/2);
+        velocity = new PVector(2.5f, -2);
         }
         
         public void draw(){
-        stroke(255); 
-        
-        circle(250, 250,200);
-        textSize(50);
-        
-        text("Hellokjdkjdkdjkdj", 190, 270);
-        System.out.println("hi"); 
+        background(255);
+       
+       
+       location.add(velocity);
+    
+        if ((location.x > width) || (location.x < 0)){
+         velocity.x = velocity.x * -1;   
+        }
+        if ((location.y > height) || (location.y < 0)){
+            velocity.y = velocity.y * -1;   
+        }
+    
+
+        stroke(0);
+        strokeWeight(2);
+        fill(175);
+        ellipse(location.x, location.y, 48, 48);
+    
+    
     }
 }
