@@ -16,8 +16,8 @@ public class assignment extends Visual {
     float[][] land;
 
     public void settings(){
-        size(600, 600, P3D);
-      
+        //size(600, 600, P3D);
+        fullScreen(P3D,SPAN);
         }
         
         public void setup(){
