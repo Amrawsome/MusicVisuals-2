@@ -1,8 +1,8 @@
 # Music Visualiser Project
 
-Name:
+Name: Raghd Al Juma
 
-Student Number: 
+Student Number: D19125768
 
 ## Instructions
 - Fork this repository and use it a starter project for your assignment
@@ -12,11 +12,23 @@ Student Number:
 - Check out the WaveForm and AudioBandsVisual for examples of how to call the Processing functions from other classes that are not subclasses of PApplet
 
 # Description of the assignment
+The music visuals assignment, a processing program that works on visual graphics based on a pre loaded audio. In our project, there is three scenes created by
+each member of the group in which each of us created visuals that react to the song "Different Heaven & EH!DE - My Heart [NCS Release]".
+
+Scene 1: Crazy Planet.
+	This planet is different. It's an inhabitable planet, not because of 
+	solar radiation, temperature nor lack of water but because of its madness! 
+	This planet will not calm down when there is a beat to dance to.
+Scene x:
+Scene x:
 
 # Instructions
-
+scene 1:
+	press key '0' to watch the crazy planet scene.
+	press mouse to turn on the light on the crazy!
 # How it works
-
+scene 1:
+	
 # What I am most proud of in the assignment
 
 # Markdown Tutorial
