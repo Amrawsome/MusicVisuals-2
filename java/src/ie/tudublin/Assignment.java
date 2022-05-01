@@ -65,40 +65,47 @@ public class Assignment extends PApplet{
     }
     
     //draw planet method 
-    void drawPlanet(float s, float g, float size) { 
-        float halfH = height / 2;
-        float widthH = width / 2;
+    void drawPlanet(float s, float g, float size) 
+    { 
+
+        //map audio buffer size
         float n = map(20, 0, audioBuffer.size(), 0, 255);
-        stroke(204, 102, n);
         translate(s, g);
         if(mousePressed)
         {
             lights();
         }
         
-        ambientLight(100,n,220);
+        ambientLight(150, n, 220);
         
+        //rotate planet on x, y , z axis
         rotateY((float) (frameCount/100.0));
         rotateX((float) (frameCount/50.0));
         rotateZ((float) (frameCount/50.0));
-        fill(255);
+
+        //fill
+        fill(100);
         noStroke();
+
+        //draw sphere
         sphere(size);
 
+        //loop through buffer and draw the hoops around the planet
         for(int i = 0 ; i < audioBuffer.size()/2 ; i ++)
         {
             
-            
             float c = map(i, 0, audioBuffer.size(), 0, 255);
-            
-            noStroke();
-            float f = lerpedBuffer[i] * halfH * 4.0f;
+            float f = lerpedBuffer[i] * height/2 * 4.0f;
 
+            noStroke();
             
+            //rotate the hoops around planet
             rotate(c);
-            fill(204, 102, c);
+            fill(s*0.3f, s*0.5f, c);
+
+            //draw hoops
             circle(f*0.6f , i, f*0.4f);
-            circle(f * 0.2f, i, f *0.4f);  
+            circle(f * 0.8f, i, f *0.4f);  
         }
     }
 
@@ -126,17 +133,16 @@ public class Assignment extends PApplet{
 			case 0:
             {
                 background(0); 
-                //textAlign(CENTER);
+
+                //print instructions on screen
                 textSize((float) (25));	
                 fill(200, 140); 
                 text("Press Mouse to turn on Lights on this Crazy Planet", CENTER, TOP);
+                
+                //draw 3 planets
                 drawPlanet(widthH+200, halfH, size);
                 drawPlanet(widthH-200, halfH/2, size* 0.3f);
-                drawPlanet(widthH-50, halfH, size*0.5f);
-                //image(cube, 0, 0);
-                            
-                
-                
+                drawPlanet(widthH-50, halfH, size*0.5f);      
                 break;
             }
             
