@@ -149,6 +149,11 @@ public class Assignment extends PApplet{
 
                 break;
             }
+
+            case 2:
+            {
+                break;
+            }
         }
     }
 
