@@ -10,9 +10,7 @@ public class assignment extends Visual {
     int rows;
     int scale =20;
     int w = 5000;
-    int h = 1500;
-   
-
+    int h = 3000;
     float[][] land;
 
     public void settings(){
@@ -20,59 +18,55 @@ public class assignment extends Visual {
         fullScreen(P3D,SPAN);
         }
         
-        public void setup(){
+    public void setup(){
         color(HSB);
         startMinim();
         // Call loadAudio to load an audio file to process 
         loadAudio("Different Heaven & EH!DE - My Heart [NCS Release].mp3");   
-        background(0);
         cols =w/scale;
         rows=h/scale;
+        getAudioPlayer().play();
         
-        }     
-        public void keyPressed()
-        {
-            if (key == ' ')
-            {
-                getAudioPlayer().cue(0);
-                getAudioPlayer().play();
-
-            }
-        }
-        public void draw(){
-            background(0, 0, 0, 10);
-            float c = map(getAmplitude(), 0, 0.5f, 0, 255);
-            stroke(c,random(0,255),200);
-            noFill();
-            float yoff = getAmplitude();
+    }     
+   
+    public void draw(){
+        background(0);
+        calculateAverageAmplitude();
+        calculateFrequencyBands();
+        System.out.println(getAmplitude()+" A");
+        System.out.println(getSmoothedAmplitude()+" SA");
+    
         land =new float [cols][rows];
+        float yoff = getAmplitude();
         for(int y =0; y < rows;y++){
             float xoff = 0;
             for(int x =0; x < cols; x++){
                 land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
-                xoff +=0.5;
+                xoff +=1;
             } 
-            yoff+=getAmplitude()/2000;
+            yoff+=getAmplitude()*2;
         }
-           
 
-           
-            calculateAverageAmplitude();
-            calculateFrequencyBands();
-            System.out.println(getAmplitude());
-            
-           
-            
-            translate(width/2, height/2);
-            rotateX(PI/1.5f);
-           translate(-w/2, -h/2);
-            for(int y =0; y < rows-1;y++){
-                beginShape(TRIANGLE_STRIP);
+        pushMatrix();
+        translate(950, height/20, -200);
+        noFill();
+        stroke(map(getSmoothedAmplitude()*100, 0, 10, 0, 255), 255, 255);
+        sphere(getAmplitude()*1000);
+        popMatrix();
+
+        translate(width/2, height/2);
+        rotateX(PI/2.5f);
+        translate(-w/2, -h/2);
+        for(int y =0; y < rows-1;y++){
+            beginShape(TRIANGLE_STRIP);
             for(int x =0; x < cols; x++){
                 vertex(x*scale, y*scale,land[x][y]);
                 vertex(x*scale, (y+1)*scale, land[x][y+1]);
-                }
-                endShape();
             }
+            endShape();
+        }
+
+           
+            
     }
 }
