@@ -105,13 +105,14 @@ public class sceneR extends PApplet{
         cube.box(size);
         cube.endDraw();
         */
-        translate(f, g);
+        translate(mouseX, mouseY);
         
         lights();
         ambientLight(0,0,255);
         //spotLight(255, 0, 0, width/2, height/2, 400, 0, 0, -1, PI/4, 2);
         rotateY((float) (frameCount/100.0));
         rotateX((float) (frameCount/50.0));
+        rotateZ((float) (frameCount/50.0));
         noStroke();
         fill(255);
         sphere(100);
