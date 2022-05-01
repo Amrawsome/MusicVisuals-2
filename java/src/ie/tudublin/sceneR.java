@@ -93,9 +93,10 @@ public class sceneR extends PApplet{
     void drawCube(float f, float g, float size) { 
         float c = map(20, 0, audioBuffer.size(), 0, 255);
         stroke(204, 102, c);
-        
+        /*
         cube.beginDraw();
-        cube.lights();
+        //cube.lights();
+        //directionalLight(0, 255, 0, 0, -1, 0);
         cube.background(0);
         cube.noStroke();
         cube.translate(f, g);
@@ -103,6 +104,17 @@ public class sceneR extends PApplet{
         cube.rotateX((float) (frameCount/50.0));
         cube.box(size);
         cube.endDraw();
+        */
+        translate(f, g);
+        
+        lights();
+        ambientLight(0,0,255);
+        //spotLight(255, 0, 0, width/2, height/2, 400, 0, 0, -1, PI/4, 2);
+        rotateY((float) (frameCount/100.0));
+        rotateX((float) (frameCount/50.0));
+        noStroke();
+        fill(255);
+        sphere(100);
       }
 
     public void draw()
