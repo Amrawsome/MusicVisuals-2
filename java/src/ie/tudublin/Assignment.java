@@ -16,10 +16,6 @@ public class Assignment extends PApplet{
     AudioInput audioInput;
     AudioBuffer audioBuffer;
 
-    float off = 0;
-
-    PGraphics cube;
-
     // pause/play key
     int mode = 0;
 
@@ -28,8 +24,9 @@ public class Assignment extends PApplet{
     float y = 0;
     float smoothedY = 0;
     float smoothedAmplitude = 0;
+    float off = 0;
     
-    
+    //if space key is pressed pause/play
     public void keyPressed() {
 		if (key >= '0' && key <= '9') {
 			mode = key - '0';
@@ -44,46 +41,65 @@ public class Assignment extends PApplet{
         }
 	}
 
+    //set to fullscreen with P3D renderer
     public void settings()
     {
         fullScreen(P3D, SPAN);
         //size(displayWidth, displayHeight, P3D);
     }
 
-
     public void setup()
     {
-        
-        cube = createGraphics(width, height, P3D);
+        //load music and play
         minim = new Minim(this);
         audioPlayer = minim.loadFile("Heaven.mp3", 1024);
         audioPlayer.play();
         audioBuffer = audioPlayer.mix;
+
+        //set color mode to RGB
         colorMode(RGB);
 
         y = height / 2;
         smoothedY = y;
-
         lerpedBuffer = new float[width];
     }
     
-    void drawPlanet(float f, float g, float size) { 
-        float c = map(20, 0, audioBuffer.size(), 0, 255);
-        stroke(204, 102, c);
-        translate(mouseX, mouseY);
+    //draw planet method 
+    void drawPlanet(float s, float g, float size) { 
+        float halfH = height / 2;
+        float widthH = width / 2;
+        float n = map(20, 0, audioBuffer.size(), 0, 255);
+        stroke(204, 102, n);
+        translate(s, g);
         if(mousePressed)
         {
             lights();
         }
         
-        ambientLight(100,c,220);
+        ambientLight(100,n,220);
         
         rotateY((float) (frameCount/100.0));
         rotateX((float) (frameCount/50.0));
         rotateZ((float) (frameCount/50.0));
         fill(255);
         noStroke();
-        sphere(100);
+        sphere(size);
+
+        for(int i = 0 ; i < audioBuffer.size()/2 ; i ++)
+        {
+            
+            
+            float c = map(i, 0, audioBuffer.size(), 0, 255);
+            
+            noStroke();
+            float f = lerpedBuffer[i] * halfH * 4.0f;
+
+            
+            rotate(c);
+            fill(204, 102, c);
+            circle(f*0.6f , i, f*0.4f);
+            circle(f * 0.2f, i, f *0.4f);  
+        }
     }
 
     public void draw()
@@ -115,32 +131,11 @@ public class Assignment extends PApplet{
                 fill(200, 140); 
                 text("Press Mouse to turn on Lights on this Crazy Planet", CENTER, TOP);
                 drawPlanet(widthH+200, halfH, size);
-                image(cube, 0, 0);
+                drawPlanet(widthH-200, halfH/2, size* 0.3f);
+                drawPlanet(widthH-50, halfH, size*0.5f);
+                //image(cube, 0, 0);
                             
-                for(int i = 0 ; i < audioBuffer.size() ; i ++)
-                {
-                    
-                    
-                    float c = map(i, 0, audioBuffer.size(), 0, 255);
-                    
-                    noStroke();
-                    float f = lerpedBuffer[i] * halfH * 4.0f;
-
-                    if (f > 150)
-                    {
-                        f = 50;
-                    }
-
-                    if (c > 255)
-                    {
-                        c -= 100;
-                    }
-                    
-                    rotate(c);
-                    fill(204, 102, c);
-                    circle(f*0.6f , i, f*0.4f);
-                    circle(f * 0.2f, i, f *0.4f);  
-                }
+                
                 
                 break;
             }
