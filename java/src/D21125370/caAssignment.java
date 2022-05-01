@@ -1,4 +1,4 @@
-package ie.tudublin;
+package D21125370;
 
 import ddf.minim.*;
 import processing.core.PApplet;
@@ -19,7 +19,7 @@ public class caAssignment extends PApplet
     float off = 0;
     
 
-    //for case 6
+    //for speaker circle thingy
     float n4;
     float n6;
 
@@ -28,6 +28,7 @@ public class caAssignment extends PApplet
     final int SX = 1024;
     final int SY = 600;
 
+    
 
     public void keyPressed() {
 		if (key >= '0' && key <= '9') {
@@ -45,7 +46,8 @@ public class caAssignment extends PApplet
 
     public void settings() 
     {
-        size(1024, 600);
+        //size(1024, 600);
+        fullScreen(P3D, SPAN);
     }
 
     public void setup()
@@ -69,6 +71,7 @@ public class caAssignment extends PApplet
         float average = 0;
         float sum = 0;
         off += 1;
+        
         // Calculate sum and average of the samples
         // Also lerp each element of buffer;
         for(int i = 0 ; i < heaven.bufferSize(); i ++)
@@ -77,6 +80,8 @@ public class caAssignment extends PApplet
             lerpedBuffer[i] = lerp(lerpedBuffer[i], heaven.bufferSize(), 0.05f);
         }
         average = sum / (float) heaven.bufferSize();
+
+        smoothedAmplitude = lerp(smoothedAmplitude, average, 0.1f);
         
 
         switch (mode) {
@@ -135,25 +140,12 @@ public class caAssignment extends PApplet
                 break;
             case 2:
                 {
-                    // vertical striped lines
-                    background(0);
-                    strokeWeight(2);
-                    for(int i = 0 ; i < heaven.bufferSize() ; i +=10)
-                    {
-                        //float c = map(ab.get(i), -1, 1, 0, 255);
-                        float cc = map(i, 0, heaven.bufferSize(), 0, 255);
-                        stroke(cc, 255, 255);
-                        float f = lerpedBuffer[i] * halfH * 4.0f;
-                        line(i, halfH + f, i, halfH - f);
-                        fill(cc);
-                        circle(i, halfH + f, 5);                    
-                        circle(i, halfH - f, 5);                    
-                    }
+                    
                 }   
                 break;
             case 3:
                 {
-                    // waveforms
+                    // waveforms -- idk
 
                     background(0);
                     stroke(255);
@@ -167,15 +159,15 @@ public class caAssignment extends PApplet
                     }
                     
                     noStroke();
-                    fill( 255, 128 );
+                    fill(186,85,211);
                     
-                    rect( 0, 0, heaven.left.level()*width, 100 );
-                    rect( 0, 100, heaven.right.level()*width, 100 );
+                    rect( 0, 300, heaven.left.level()*width, 100 );
+                    rect( 0, 400, heaven.right.level()*width, 100 );
                 }
                 break;
             case 4:
                 {
-                    // little person
+                    // little person -- idk
 
                     background(0);
                     ellipseMode(CENTER);
@@ -203,18 +195,43 @@ public class caAssignment extends PApplet
                 break;
             case 5:
                 {
+                    background(0);
+                    
+                    noStroke();
+                    fill(128,0,128);
+                    push();
+                    translate(-275, 175);
+                    rotateY((float) 1.25);
+                    rotateX((float) -0.9);
+                    box(100);
+                    pop();
 
+                    noFill();
+                    stroke(255);
+                    push();
+                    translate(500, (float) (height * 0.35), -200);
+                    sphere(300);
+                    pop();
                 }
                 break;
             case 6:
                 {
-                    
+                    //soundwave
+                    background(0);
+                    for(int i = 0 ; i < heaven.bufferSize() ; i ++)
+                    {
+                        //float c = map(ab.get(i), -1, 1, 0, 255);
+                        float c = map(i, 0, heaven.bufferSize(), 0, 255);
+                        stroke(c, 255, 255);
+                        float f = lerpedBuffer[i] * halfH * 4.0f;
+                        line(i, halfH + f, i, halfH - f);                    
+                    }
                 }
                 break;
             case 7:
                 {
+                    // 
                     
-
                 }
                 break;
             
