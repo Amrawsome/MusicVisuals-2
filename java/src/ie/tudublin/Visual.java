@@ -12,11 +12,11 @@ public abstract class Visual extends PApplet
 	private float[] bands;
 	private float[] smoothedBands;
 
-	private Minim minim;
-	private AudioInput ai;
-	private AudioPlayer ap;
-	private AudioBuffer ab;
-	private FFT fft;
+	public Minim minim;
+	public AudioInput ai;
+	public AudioPlayer ap;
+	public AudioBuffer ab;
+	public FFT fft;
 
 	private float amplitude  = 0;
 	private float smothedAmplitude = 0;

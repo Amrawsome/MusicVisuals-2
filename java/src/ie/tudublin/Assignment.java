@@ -10,6 +10,8 @@ import processing.core.PGraphics;
 public class Assignment extends PApplet{
     
     //variables
+
+    Visual visuals;
     Minim minim;
     AudioPlayer audioPlayer;
     AudioInput audioInput;
