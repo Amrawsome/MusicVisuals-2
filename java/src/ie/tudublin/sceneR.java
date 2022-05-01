@@ -161,8 +161,6 @@ public class sceneR extends PApplet{
                     circle(f, i, f);
                     circle(width-f, i, f);
 
-                    size -= 50;
-
                     
                     
                 }
