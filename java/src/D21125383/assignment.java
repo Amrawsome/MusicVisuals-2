@@ -64,7 +64,7 @@ public class assignment extends Visual {
            
             
             translate(width/2, height/2);
-            rotateX(PI/3f);
+            rotateX(PI/1.5f);
            translate(-w/2, -h/2);
             for(int y =0; y < rows-1;y++){
                 beginShape(TRIANGLE_STRIP);
