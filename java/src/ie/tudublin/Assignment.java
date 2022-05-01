@@ -1,11 +1,10 @@
 package ie.tudublin;
 
-import processing.core.PApplet;
 import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
-import processing.core.PGraphics;
+import processing.core.PApplet;
 
 public class Assignment extends PApplet{
     
