@@ -30,7 +30,7 @@ public class Mover extends Visual {
         acceleration = mouse;
         velocity.add(acceleration);
         location.add(velocity);
-        //velocity.limit(5);
+        velocity.limit(5);
 
         if(location.x > width){ location.x =0;
         }
