@@ -10,7 +10,6 @@ import processing.core.PGraphics;
 public class Assignment extends PApplet{
     
     //variables
-
     Visual visuals;
     Minim minim;
     AudioPlayer audioPlayer;
@@ -93,7 +92,7 @@ public class Assignment extends PApplet{
         float widthH = width / 2;
         float average = 0;
         float sum = 0;
-        int size = 300;
+        int size = 100;
         off += 1;
 
         // Calculate sum and average of the samples
@@ -139,8 +138,8 @@ public class Assignment extends PApplet{
                     
                     rotate(c);
                     fill(204, 102, c);
-                    circle(f , i, f);
-                    circle(width-f, i, f);  
+                    circle(f*0.6f , i, f*0.4f);
+                    circle(f * 0.2f, i, f *0.4f);  
                 }
                 
                 break;
