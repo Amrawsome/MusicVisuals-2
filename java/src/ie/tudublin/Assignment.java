@@ -76,7 +76,7 @@ public class Assignment extends PApplet{
             lights();
         }
         
-        ambientLight(150, n, 220);
+        ambientLight(100, n, 255);
         
         //rotate planet on x, y , z axis
         rotateY((float) (frameCount/100.0));
@@ -101,7 +101,7 @@ public class Assignment extends PApplet{
             
             //rotate the hoops around planet
             rotate(c);
-            fill(s*0.3f, s*0.5f, c);
+            fill(s, f, c);
 
             //draw hoops
             circle(f*0.6f , i, f*0.4f);
