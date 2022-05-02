@@ -70,7 +70,7 @@ public class caAssignment extends PApplet
                     noCursor();
                     smooth();
                     background (0);
-                    frameRate(24);
+                    //frameRate(24);
 
                     fill(0,50);  
                     noStroke();
