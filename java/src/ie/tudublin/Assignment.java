@@ -178,13 +178,11 @@ public class Assignment extends Setup{
             {
                  //progress bar
                  background(0);
-                 per = (float) ((per + 0.1) % 100); 
-                 //System.out.println(per);
+                 per = (float) ((per + 0.15) % 100); 
                  textSize(30);
                  text("Loading ... " + per + " %", SX / 4, (float) (SY / 2.5));
                  rect(SX / 4, SY / 2, per * 2, 20, 7); 
-                 System.out.println(per);
-                 if(per >= 98){
+                 if(per >= 99){
                     mode=1;
                       
                 }
@@ -197,8 +195,6 @@ public class Assignment extends Setup{
                  noCursor();
                  smooth();
                  background (0);
-                 frameRate(24);
-
                  fill(0,50);  
                  noStroke();
                  rect(0, 0, width, height);

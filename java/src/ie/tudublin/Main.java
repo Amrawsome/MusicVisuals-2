@@ -24,8 +24,7 @@ public class Main
 	}
 
 	public static void main(String[] args)
-	{
-		//assignment();	
+	{	
 		assignment();		
 	}
 
