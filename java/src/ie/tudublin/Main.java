@@ -1,4 +1,5 @@
 package ie.tudublin;
+import D21125370.caAssignment;
 import example.MyVisual;
 
 public class Main
@@ -16,9 +17,16 @@ public class Main
         processing.core.PApplet.runSketch( a, new Assignment());		
 	}
 
+	public static void assignmentLaura()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new caAssignment());		
+	}
+
 	public static void main(String[] args)
 	{
-		assignment();			
+		//assignment();	
+		assignmentLaura();		
 	}
 
 	
