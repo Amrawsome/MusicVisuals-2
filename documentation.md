@@ -29,7 +29,7 @@ These visuals were generated based on knowledge gained in classes or by internet
 (need to check this) The files for this assignemnt are located in java/src/ie/tudublin of the Music Visuals-2 folder. You can run our assignment from the Main.java file. 
 
 ## How it works
-(need to check this) 
+(need to check this) Once the file is ran from the main, a fullscreen processing window is display where the song and a loading bar is displayed. When the loading bar is completed, the first scene is shown.
 
 ## What I am most proud of in the assignment
 
