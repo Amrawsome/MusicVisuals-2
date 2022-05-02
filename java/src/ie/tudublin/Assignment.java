@@ -27,6 +27,18 @@ public class Assignment extends Setup{
     float smoothedAmplitude = 0;
     float off = 0;
 
+    //laura
+    // for speaker circle thingy
+    float n4;
+    float n6;
+
+    // for progress bar
+    float per = 0;
+    final int SX = 1024;
+    final int SY = 600;
+
+    //end laura
+
     //stephen
     Random rand = new Random(123456789L);
     int cols;
@@ -164,20 +176,81 @@ public class Assignment extends Setup{
         switch (mode) {
 			case 0:
             {
-                background(0); 
-                 //print instructions on screen
-                 textSize((float)(25));	
-                 fill(200, 140); 
-                 text("Press Mouse to turn on Lights on this Crazy Planet", CENTER, TOP);
+                 //progress bar
+                 background(0);
+                 per = (float) ((per + 0.1) % 100); 
+                 //System.out.println(per);
+                 textSize(30);
+                 text("Loading ... " + per + " %", SX / 4, (float) (SY / 2.5));
+                 rect(SX / 4, SY / 2, per * 2, 20, 7); 
+                 System.out.println(per);
+                 if(per >= 98){
+                    mode=1;
+                      
+                }
                  
-                 //draw 3 planets
-                 drawPlanet(widthH+200, halfH, size);
-                 drawPlanet(widthH-200, halfH/2, size* 0.3f);
-                 drawPlanet(widthH-50, halfH, size*0.5f);    
                 break;
             }
-            
             case 1:
+            {
+                 // like a speaker circle thingy
+                 noCursor();
+                 smooth();
+                 background (0);
+                 frameRate(24);
+
+                 fill(0,50);  
+                 noStroke();
+                 rect(0, 0, width, height);
+                 translate(width/2, height/2);
+                 
+                 for (int i = 0; i < audioPlayer.bufferSize() - 1; i++) {
+                 
+                     float angle = sin(i+n4)* 10; 
+                     float angle2 = sin(i+n6)* 300; 
+                     
+                     float x = sin(radians(i))*(angle2+30); 
+                     float y = cos(radians(i))*(angle2+30);
+                     
+                     float x3 = sin(radians(i))*(500/angle); 
+                     float y3 = cos(radians(i))*(500/angle);
+                     
+                     fill(128,0,128); // purple
+                     ellipse(x, y, audioPlayer.left.get(i)*10, audioPlayer.left.get(i)*10);
+                     
+                     fill(255,255,255); // white
+                     rect(x3, y3, audioPlayer.left.get(i)*20, audioPlayer.left.get(i)*10);
+                     
+                     fill(186,85,211); // medium orchid
+                     rect(x, y, audioPlayer.right.get(i)*10, audioPlayer.left.get(i)*10);
+                     
+                     fill(255,255,255); // white
+                     rect(x3, y3, audioPlayer.right.get(i)*10, audioPlayer.right.get(i)*20);
+                 }  
+
+                 n4 += 0.008;
+                 n6 += 0.04;
+                break;  
+            }
+            
+            case 2:
+            {
+                background(0); 
+                //print instructions on screen
+                textSize((float)(25));	
+                fill(200, 140); 
+                text("Press Mouse to turn on Lights on this Crazy Planet", CENTER, TOP);
+                
+                //draw 3 planets
+                drawPlanet(widthH+200, halfH, size);
+                drawPlanet(widthH-200, halfH/2, size* 0.3f);
+                drawPlanet(widthH-50, halfH, size*0.5f);    
+               
+                 break;
+                
+            }
+
+            case 3:
             {
                 background(0);
                 System.out.println(average*500+" A");
@@ -195,7 +268,8 @@ public class Assignment extends Setup{
                 }
                 
                 pushMatrix();
-                translate(950, height/20, -200);
+                translate(width/2, height/2-280);
+                
                 noFill();
                 stroke(225,0,255);
                 sphere(average*1000);
@@ -204,7 +278,7 @@ public class Assignment extends Setup{
                 noFill();
                 
                 translate(width/2, height/2);
-                rotateX(PI/2.5f);
+                rotateX(PI/2.2f);
                 translate(-w/2, -h/2);
                 for(int y =0; y < rows-1;y++){
                     beginShape(TRIANGLE_STRIP);
@@ -214,13 +288,6 @@ public class Assignment extends Setup{
                     }
                     endShape();
                 }  
-               
-                 break;
-                
-            }
-
-            case 2:
-            {
                 break;
             }
         }
