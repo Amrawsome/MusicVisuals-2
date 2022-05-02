@@ -1,12 +1,14 @@
 package ie.tudublin;
 
+import java.util.Random;
+
 import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import processing.core.PApplet;
 
-public class Assignment extends Visual{
+public class Assignment extends Setup{
     
     //variables
     Visual visuals;
@@ -14,7 +16,7 @@ public class Assignment extends Visual{
     AudioPlayer audioPlayer;
     AudioInput audioInput;
     AudioBuffer audioBuffer;
-   
+
     // pause/play key
     int mode = 0;
 
@@ -24,16 +26,22 @@ public class Assignment extends Visual{
     float smoothedY = 0;
     float smoothedAmplitude = 0;
     float off = 0;
-    
-     //stephens
-     int cols;
-     int rows;
-     int scale =20;
-     int w = 5000;
-     int h = 3000;
-     float[][] land;
-     //end stephens
 
+    //stephen
+    Random rand = new Random(123456789L);
+    int cols;
+    int rows;
+    int scale =20;
+    int w = 5000;
+    int h = 3000;
+    float[][] land;
+    float average =0;
+    public int random1;
+    public int random2;
+    public int random3;
+    
+    //end stephen
+    
     //if space key is pressed pause/play
     public void keyPressed() {
 		if (key >= '0' && key <= '9') {
@@ -54,11 +62,15 @@ public class Assignment extends Visual{
     {
         fullScreen(P3D, SPAN);
         //size(displayWidth, displayHeight, P3D);
+        //size(600, 600,P3D);
     }
 
     public void setup()
     {
         //load music and play
+        // startMinim();
+        // loadAudio("Heaven.mp3");
+        // getAudioPlayer().play();
         minim = new Minim(this);
         audioPlayer = minim.loadFile("Heaven.mp3", 1024);
         audioPlayer.play();
@@ -66,12 +78,10 @@ public class Assignment extends Visual{
 
         //set color mode to RGB
         colorMode(RGB);
-        //stephen
-        cols =w/scale;
-        rows=h/scale;
-        //end stephen
         y = height / 2;
         smoothedY = y;
+        cols =w/scale;
+        rows=h/scale;
         lerpedBuffer = new float[width];
     }
     
@@ -121,7 +131,17 @@ public class Assignment extends Visual{
     }
 
     public void draw()
-    {
+    {   
+        int random1 = rand.nextInt(200);
+        int random2 = rand.nextInt(200);
+        int random3 = rand.nextInt(200);
+        
+
+        // System.out.println(random1 +" 1");
+        // System.out.println(random2 + " 2");
+        // System.out.println(random3+ " 3");
+    
+        // calculateAverageAmplitude();
         float halfH = height / 2;
         float widthH = width / 2;
         float average = 0;
@@ -139,62 +159,64 @@ public class Assignment extends Visual{
         average= sum / (float) audioBuffer.size();
 
         smoothedAmplitude = lerp(smoothedAmplitude, average, 0.01f);
+       
 
         switch (mode) {
 			case 0:
             {
                 background(0); 
-
-                //print instructions on screen
-                textSize((float) (25));	
-                fill(200, 140); 
-                text("Press Mouse to turn on Lights on this Crazy Planet", CENTER, TOP);
-                
-                //draw 3 planets
-                drawPlanet(widthH+200, halfH, size);
-                drawPlanet(widthH-200, halfH/2, size* 0.3f);
-                drawPlanet(widthH-50, halfH, size*0.5f);      
+                 //print instructions on screen
+                 textSize((float)(25));	
+                 fill(200, 140); 
+                 text("Press Mouse to turn on Lights on this Crazy Planet", CENTER, TOP);
+                 
+                 //draw 3 planets
+                 drawPlanet(widthH+200, halfH, size);
+                 drawPlanet(widthH-200, halfH/2, size* 0.3f);
+                 drawPlanet(widthH-50, halfH, size*0.5f);    
                 break;
             }
             
             case 1:
             {
                 background(0);
-        calculateAverageAmplitude();
-        calculateFrequencyBands();
-        System.out.println(getAmplitude()+" A");
-        System.out.println(getSmoothedAmplitude()+" SA");
-    
-        land =new float [cols][rows];
-        float yoff = getAmplitude();
-        for(int y =0; y < rows;y++){
-            float xoff = 0;
-            for(int x =0; x < cols; x++){
-                land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
-                xoff +=1;
-            } 
-            yoff+=getAmplitude()*2;
-        }
+                System.out.println(average*500+" A");
+                System.out.println(getSmoothedAmplitude()+" SA");
+            
+                land =new float [cols][rows];
+                float yoff = average;
+                for(int y =0; y < rows;y++){
+                    float xoff = 0;
+                    for(int x =0; x < cols; x++){
+                        land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
+                        xoff +=1;
+                    } 
+                    yoff+=average;
+                }
+                
+                pushMatrix();
+                translate(950, height/20, -200);
+                noFill();
+                stroke(225,0,255);
+                sphere(average*1000);
+                popMatrix();
 
-        pushMatrix();
-        translate(950, height/20, -200);
-        noFill();
-        stroke(map(getSmoothedAmplitude()*100, 0, 10, 0, 255), 255, 255);
-        sphere(getAmplitude()*1000);
-        popMatrix();
-
-        translate(width/2, height/2);
-        rotateX(PI/2.5f);
-        translate(-w/2, -h/2);
-        for(int y =0; y < rows-1;y++){
-            beginShape(TRIANGLE_STRIP);
-            for(int x =0; x < cols; x++){
-                vertex(x*scale, y*scale,land[x][y]);
-                vertex(x*scale, (y+1)*scale, land[x][y+1]);
-            }
-            endShape();
-        }
-                break;
+                noFill();
+                
+                translate(width/2, height/2);
+                rotateX(PI/2.5f);
+                translate(-w/2, -h/2);
+                for(int y =0; y < rows-1;y++){
+                    beginShape(TRIANGLE_STRIP);
+                    for(int x =0; x < cols; x++){ 
+                        vertex(x*scale, y*scale,land[x][y]);
+                        vertex(x*scale, (y+1)*scale, land[x][y+1]);
+                    }
+                    endShape();
+                }  
+               
+                 break;
+                
             }
 
             case 2:
