@@ -9,27 +9,23 @@ public class caAssignment extends PApplet
     Minim minim;
     AudioPlayer heaven;
 
-    int mode = 0;
+    int mode = 0;    
 
-    float y = 0;
-    float smoothedY = 0;
-    float smoothedAmplitude = 0;
-
-    float[] lerpedBuffer;
-    float off = 0;
-    
-
-    //for speaker circle thingy
+    // for speaker circle thingy
     float n4;
     float n6;
 
-    //for progress bar
+    // for progress bar
     float per = 0;
     final int SX = 1024;
     final int SY = 600;
 
-    
+    // for text
+    String message = "Goodbye!";
+    float x, y; // X and Y coordinates of text
+    float hr, vr;  // horizontal and vertical radius of the text
 
+    
     public void keyPressed() {
 		if (key >= '0' && key <= '9') {
 			mode = key - '0';
@@ -46,7 +42,6 @@ public class caAssignment extends PApplet
 
     public void settings() 
     {
-        //size(1024, 600);
         fullScreen(P3D, SPAN);
     }
 
@@ -56,50 +51,66 @@ public class caAssignment extends PApplet
 
         minim = new Minim(this);
         heaven = minim.loadFile("differentheaven.mp3", 1024);
-        heaven.loop();
+        heaven.play();
 
-        lerpedBuffer = new float[width];
-
+        // Create the font
+        textSize(36);      
+        x = width / 2;
+        y = height / 2;
         
     }
 
     public void draw()
-    {
-        
-        // Lerped buffer
-        float halfH = height / 2;
-        float average = 0;
-        float sum = 0;
-        off += 1;
-        
-        // Calculate sum and average of the samples
-        // Also lerp each element of buffer;
-        for(int i = 0 ; i < heaven.bufferSize(); i ++)
-        {
-            sum += abs(heaven.bufferSize());
-            lerpedBuffer[i] = lerp(lerpedBuffer[i], heaven.bufferSize(), 0.05f);
-        }
-        average = sum / (float) heaven.bufferSize();
-
-        smoothedAmplitude = lerp(smoothedAmplitude, average, 0.1f);
-        
-
+    {     
         switch (mode) {
 			case 0:
                 {
+                    text("Goodbye!", x, y);
+
+
+
+                    // little person
+
+                    background(0);
+                    ellipseMode(CENTER);
+                    rectMode(CENTER); 
+
+                    //text
+                    text("Goodbye!", 0, 0);
+
+                    // Body
+                    stroke(0);
+                    fill(150);
+                    rect(500, 45, 20, 100);
+
+                    // Head
+                    fill(255);
+                    ellipse(500, 15, 60, 60); 
+
+                    // Eyes
+                    fill(0); 
+                    ellipse(221, 115, 16, 32); 
+                    ellipse(259, 115, 16, 32);
+
+                    // Legs
+                    stroke(0);
+                    line(230, 195, 220, 205);
+                    line(250, 195, 260, 205);  
+
+
+                    /*
                     //progress bar
                     background(0);
                     per = (float) ((per + 0.15) % 100); 
                     textSize(30);
                     text("Loading ... " + per + " %", SX / 4, (float) (SY / 2.5));
-                    rect(SX / 4, SY / 2, per * 2, 20, 7);
+                    rect(SX / 4, SY / 2, per * 2, 20, 7); */
                     
                 }
                 break;
             case 1:
                 {
                     // like a speaker circle thingy
-
                     noCursor();
                     smooth();
                     background (0);
@@ -137,105 +148,12 @@ public class caAssignment extends PApplet
                     n4 += 0.008;
                     n6 += 0.04;
                 }
-                break;
-            case 2:
-                {
-                    
-                }   
-                break;
-            case 3:
-                {
-                    // waveforms -- idk
-
-                    background(0);
-                    stroke(255);
-                    
-                    for(int i = 0; i < heaven.bufferSize() - 1; i++)
-                    {
-                        float x1 = map( i, 0, heaven.bufferSize(), 0, width );
-                        float x2 = map( i+1, 0, heaven.bufferSize(), 0, width );
-                        line( x1, 50 + heaven.left.get(i)*50, x2, 50 + heaven.left.get(i+1)*50 );
-                        line( x1, 150 + heaven.right.get(i)*50, x2, 150 + heaven.right.get(i+1)*50 );
-                    }
-                    
-                    noStroke();
-                    fill(186,85,211);
-                    
-                    rect( 0, 300, heaven.left.level()*width, 100 );
-                    rect( 0, 400, heaven.right.level()*width, 100 );
-                }
-                break;
-            case 4:
-                {
-                    // little person -- idk
-
-                    background(0);
-                    ellipseMode(CENTER);
-                    rectMode(CENTER); 
-
-                    // Body
-                    stroke(0);
-                    fill(150);
-                    rect(240, 145, 20, 100);
-
-                    // Head
-                    fill(255);
-                    ellipse(240, 115, 60, 60); 
-
-                    // Eyes
-                    fill(0); 
-                    ellipse(221, 115, 16, 32); 
-                    ellipse(259, 115, 16, 32);
-
-                    // Legs
-                    stroke(0);
-                    line(230, 195, 220, 205);
-                    line(250, 195, 260, 205);  
-                }
-                break;
-            case 5:
-                {
-                    background(0);
-                    
-                    noStroke();
-                    fill(128,0,128);
-                    push();
-                    translate(-275, 175);
-                    rotateY((float) 1.25);
-                    rotateX((float) -0.9);
-                    box(100);
-                    pop();
-
-                    noFill();
-                    stroke(255);
-                    push();
-                    translate(500, (float) (height * 0.35), -200);
-                    sphere(300);
-                    pop();
-                }
-                break;
-            case 6:
-                {
-                    //soundwave
-                    background(0);
-                    for(int i = 0 ; i < heaven.bufferSize() ; i ++)
-                    {
-                        //float c = map(ab.get(i), -1, 1, 0, 255);
-                        float c = map(i, 0, heaven.bufferSize(), 0, 255);
-                        stroke(c, 255, 255);
-                        float f = lerpedBuffer[i] * halfH * 4.0f;
-                        line(i, halfH + f, i, halfH - f);                    
-                    }
-                }
-                break;
-            case 7:
-                {
-                    // 
-                    
-                }
-                break;
-            
+                break;            
                 
         }// end switch
     }// end draw method
 }// end class
+
+/*
+
+*/
