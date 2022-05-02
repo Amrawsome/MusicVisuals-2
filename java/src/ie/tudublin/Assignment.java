@@ -6,7 +6,7 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import processing.core.PApplet;
 
-public class Assignment extends PApplet{
+public class Assignment extends Visual{
     
     //variables
     Visual visuals;
@@ -14,7 +14,7 @@ public class Assignment extends PApplet{
     AudioPlayer audioPlayer;
     AudioInput audioInput;
     AudioBuffer audioBuffer;
-
+   
     // pause/play key
     int mode = 0;
 
@@ -25,6 +25,15 @@ public class Assignment extends PApplet{
     float smoothedAmplitude = 0;
     float off = 0;
     
+     //stephens
+     int cols;
+     int rows;
+     int scale =20;
+     int w = 5000;
+     int h = 3000;
+     float[][] land;
+     //end stephens
+
     //if space key is pressed pause/play
     public void keyPressed() {
 		if (key >= '0' && key <= '9') {
@@ -57,7 +66,10 @@ public class Assignment extends PApplet{
 
         //set color mode to RGB
         colorMode(RGB);
-
+        //stephen
+        cols =w/scale;
+        rows=h/scale;
+        //end stephen
         y = height / 2;
         smoothedY = y;
         lerpedBuffer = new float[width];
@@ -147,7 +159,41 @@ public class Assignment extends PApplet{
             
             case 1:
             {
+                background(0);
+        calculateAverageAmplitude();
+        calculateFrequencyBands();
+        System.out.println(getAmplitude()+" A");
+        System.out.println(getSmoothedAmplitude()+" SA");
+    
+        land =new float [cols][rows];
+        float yoff = getAmplitude();
+        for(int y =0; y < rows;y++){
+            float xoff = 0;
+            for(int x =0; x < cols; x++){
+                land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
+                xoff +=1;
+            } 
+            yoff+=getAmplitude()*2;
+        }
 
+        pushMatrix();
+        translate(950, height/20, -200);
+        noFill();
+        stroke(map(getSmoothedAmplitude()*100, 0, 10, 0, 255), 255, 255);
+        sphere(getAmplitude()*1000);
+        popMatrix();
+
+        translate(width/2, height/2);
+        rotateX(PI/2.5f);
+        translate(-w/2, -h/2);
+        for(int y =0; y < rows-1;y++){
+            beginShape(TRIANGLE_STRIP);
+            for(int x =0; x < cols; x++){
+                vertex(x*scale, y*scale,land[x][y]);
+                vertex(x*scale, (y+1)*scale, land[x][y+1]);
+            }
+            endShape();
+        }
                 break;
             }
 
