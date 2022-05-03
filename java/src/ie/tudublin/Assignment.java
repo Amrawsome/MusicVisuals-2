@@ -109,7 +109,8 @@ public class Assignment extends Setup{
             lights();
         }
         
-        ambientLight(100, n, 255);
+        ambientLight(100, n, 100);
+        directionalLight(51, 102, 126, -1, 0, 0);
         
         //rotate planet on x, y , z axis
         rotateY((float) (frameCount/100.0));
