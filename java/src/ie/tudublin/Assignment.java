@@ -101,15 +101,16 @@ public class Assignment extends Setup{
     void drawPlanet(float s, float g, float size) 
     { 
 
-        //map audio buffer size
-        float n = map(20, 0, audioBuffer.size(), 0, 255);
+        //position of planet
         translate(s, g);
         if(mousePressed)
         {
             lights();
+            ambientLight(200, 20, 250);
+            directionalLight(51, 102, 126, -1, 0, 0);
         }
         
-        ambientLight(100, n, 100);
+        ambientLight(100, 20, 100);
         directionalLight(51, 102, 126, -1, 0, 0);
         
         //rotate planet on x, y , z axis
