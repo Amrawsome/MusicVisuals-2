@@ -7,7 +7,7 @@ import ddf.minim.Minim;
 
 
 
-public class Assignment extends Setup{
+public class assignment extends Setup{
     
     //variables
 //Visual visuals;
@@ -79,7 +79,6 @@ public class Assignment extends Setup{
         //size(displayWidth, displayHeight, P3D);
         //size(600, 600,P3D);
     }
-
     public void setup()
     {
         //load music and play
@@ -154,8 +153,8 @@ public class Assignment extends Setup{
                 
                 //draw 3 planets
                 drawPlanet(widthH+200, halfH, size);
-                drawPlanet(widthH-200, halfH/2, size* 0.3f);
-                drawPlanet(widthH-50, halfH, size*0.5f);    
+                //drawPlanet(widthH-200, halfH/2, size* 0.3f);
+                //drawPlanet(widthH-50, halfH, size*0.5f);    
                
                  break;
                 

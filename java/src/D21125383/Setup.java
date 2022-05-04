@@ -6,7 +6,6 @@ import ddf.minim.analysis.FFT;
 
 
 public class Setup extends PApplet {
-    Assignment agmt;
      // pause/play key
      int mode = 0;
      int cols;
@@ -194,7 +193,7 @@ public class Setup extends PApplet {
        background(0);
         //map audio buffer size
         float n = map(20, 0, audioBuffer.size(), 0, 255);
-        translate(s, g);
+        translate(s,g);
         if(mousePressed)
         {
             lights();
@@ -203,7 +202,7 @@ public class Setup extends PApplet {
         ambientLight(100, n, 255);
         
         //rotate planet on x, y , z axis
-        rotateY((float) (frameCount/100.0));
+        rotateY((float) (frameCount/1000.0));
         rotateX((float) (frameCount/50.0));
         rotateZ((float) (frameCount/50.0));
 
@@ -212,7 +211,7 @@ public class Setup extends PApplet {
         noStroke();
 
         //draw sphere
-        sphere(size);
+        sphere(size*1.5f);
 
         //loop through buffer and draw the hoops around the planet
         for(int i = 0 ; i < audioBuffer.size()/2 ; i ++)
@@ -228,8 +227,8 @@ public class Setup extends PApplet {
             fill(s, f, c);
 
             //draw hoops
-            circle(f*0.6f , i, f*0.4f);
-            circle(f * 0.8f, i, f *0.4f);  
+            circle(f*1.6f , i, f*1.4f);
+            circle(f * 1.8f, i, f* 1.4f);  
         }
     }
    
