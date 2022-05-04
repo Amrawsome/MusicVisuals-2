@@ -22,11 +22,10 @@ public class Main
 		String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new caAssignment());		
 	}
-
 	public static void main(String[] args)
 	{
 		//assignment();	
-		assignment();		
+		assignment();
 	}
 
 	
