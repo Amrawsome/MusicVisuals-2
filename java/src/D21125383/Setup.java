@@ -202,7 +202,7 @@ public class Setup extends PApplet {
         ambientLight(100, n, 255);
         
         //rotate planet on x, y , z axis
-        rotateY((float) (frameCount/1000.0));
+        rotateY((float) (frameCount/100.0));
         rotateX((float) (frameCount/50.0));
         rotateZ((float) (frameCount/50.0));
 
