@@ -6,7 +6,6 @@ import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ie.tudublin.Visual;
-import processing.core.PGraphics;
 
 public class assignment extends PApplet{
     

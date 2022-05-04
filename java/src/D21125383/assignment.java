@@ -1,72 +1,177 @@
 package D21125383;
 
-import javax.xml.crypto.dsig.Transform;
+import ddf.minim.AudioBuffer;
+import ddf.minim.AudioInput;
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 
-import ie.tudublin.Visual;
-import processing.core.PApplet;
 
-public class assignment extends Visual {
-    int cols;
-    int rows;
-    int scale =20;
-    int w = 5000;
-    int h = 3000;
-    float[][] land;
 
-    public void settings(){
-        //size(600, 600, P3D);
-        fullScreen(P3D,SPAN);
+public class assignment extends Setup{
+    
+    //variables
+//Visual visuals;
+    Minim minim;
+    AudioPlayer audioPlayer;
+    AudioInput audioInput;
+    AudioBuffer audioBuffer;
+
+    // pause/play key
+    int mode = 0;
+
+    //buffer
+   //float[] lerpedBuffer;
+    // float y = 0;
+    // float smoothedY = 0;
+    // float smoothedAmplitude = 0;
+    // float off = 0;
+
+    //laura
+    // for speaker circle thingy
+    // float n4;
+    // float n6;
+
+    // // for progress bar
+    // float per = 0;
+    // final int SX = 1024;
+    // final int SY = 600;
+
+    //end laura
+
+    //stephen
+    // Random rand = new Random(123456789L);
+    // int cols;
+    // int rows;
+    // int scale =20;
+    // int w = 5000;
+    // int h = 3000;
+    // float[][] land;
+    // float average =0;
+    // public int random1;
+    // public int random2;
+    // public int random3;
+    // float value =0;
+    //end stephen
+    
+
+   
+
+    //end controller
+    //if space key is pressed pause/play
+    public void keyPressed() {
+		if (key >= '0' && key <= '9') {
+			mode = key - '0';
+		}
+		if (keyCode == ' ') {
+            if (getAudioPlayer().isPlaying()) {
+                getAudioPlayer().pause();
+            } else {
+                getAudioPlayer().rewind();
+                getAudioPlayer().play();
+            }
         }
-        
-    public void setup(){
-        color(HSB);
-        startMinim();
-        // Call loadAudio to load an audio file to process 
-        loadAudio("Different Heaven & EH!DE - My Heart [NCS Release].mp3");   
+	}
+
+    //set to fullscreen with P3D renderer
+    public void settings()
+    {
+        fullScreen(P3D, SPAN);
+        //size(displayWidth, displayHeight, P3D);
+        //size(600, 600,P3D);
+    }
+
+    public void setup()
+    {
+        //load music and play
+         startMinim();
+         loadAudio("Heaven.mp3");
+         getAudioPlayer().play();
+         setAudioBuffer(getAudioPlayer().mix);
+        // minim = new Minim(this);
+        // audioPlayer = minim.loadFile("Heaven.mp3", 1024);
+        // audioPlayer.play();
+        // audioBuffer = audioPlayer.mix;
+
+        //set color mode to RGB
+        colorMode(RGB);
+        y = height / 2;
+        smoothedY = y;
         cols =w/scale;
         rows=h/scale;
-        getAudioPlayer().play();
-        
-    }     
-   
-    public void draw(){
-        background(0);
-        calculateAverageAmplitude();
-        calculateFrequencyBands();
-        System.out.println(getAmplitude()+" A");
-        System.out.println(getSmoothedAmplitude()+" SA");
+       lerpedBuffer = new float[width];
+    }
     
-        land =new float [cols][rows];
-        float yoff = getAmplitude();
-        for(int y =0; y < rows;y++){
-            float xoff = 0;
-            for(int x =0; x < cols; x++){
-                land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
-                xoff +=1;
-            } 
-            yoff+=getAmplitude()*2;
+     
+
+    public void draw()
+    {   
+        // calculateAverageAmplitude();
+        float halfH = height / 2;
+        float widthH = width / 2;
+        //float average = 0;
+        float sum = 0;
+        int size = 100;
+        off += 1;
+
+        // Calculate sum and average of the samples
+        // Also lerp each element of buffer;
+        
+        for(int i = 0 ; i < getAudioBuffer().size() ; i ++)
+        {
+            sum += abs(getAudioBuffer().get(i));
+            lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.05f);
         }
+        average= sum / (float) getAudioBuffer().size();
 
-        pushMatrix();
-        translate(950, height/20, -200);
-        noFill();
-        stroke(map(getSmoothedAmplitude()*100, 0, 10, 0, 255), 255, 255);
-        sphere(getAmplitude()*1000);
-        popMatrix();
+        smoothedAmplitude = lerp(smoothedAmplitude, average, 0.01f);
+        // calculateAverageAmplitude();
+       
 
-        translate(width/2, height/2);
-        rotateX(PI/2.5f);
-        translate(-w/2, -h/2);
-        for(int y =0; y < rows-1;y++){
-            beginShape(TRIANGLE_STRIP);
-            for(int x =0; x < cols; x++){
-                vertex(x*scale, y*scale,land[x][y]);
-                vertex(x*scale, (y+1)*scale, land[x][y+1]);
+        switch (mode) {
+			case 0:
+            {      
+                background(0);
+                 loadingBar();
+                 if(getPer() >= 99.6f){
+                    mode=1;     
+                }
+                break;
             }
-            endShape();
-        }
+            case 1:
+            {
+                background(0);
+                speaker();
+                 break;
+                
+            }
+            case 2:
+            {
+                background(0); 
+                //print instructions on screen
+                textSize((float)(25));	
+                fill(200, 140); 
+                text("Press Mouse to turn on Lights on this Crazy Planet", CENTER, TOP);
+                
+                //draw 3 planets
+                drawPlanet(widthH+200, halfH, size);
+                drawPlanet(widthH-200, halfH/2, size* 0.3f);
+                drawPlanet(widthH-50, halfH, size*0.5f);    
+               
+                 break;
+                
+            }
 
-           
-            
+            case 3:
+            {
+                background(0);
+                textSize((float)(25));	
+                fill(200, 140); 
+                text("Move Mouse Around To Change Colour And Brightness", CENTER, TOP);
+                text("Press Mouse To Fill, Move Around To Change Colour", CENTER, TOP-35);
+                Stephen(average);
+                break;
+            }
+        }
+        
     }
 }
