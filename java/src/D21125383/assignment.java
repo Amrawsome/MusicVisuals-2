@@ -141,7 +141,6 @@ public class assignment extends Visual{
         noCursor();
         smooth();
         background (0);
-        frameRate(24);
 
         fill(0,50);  
         noStroke();
