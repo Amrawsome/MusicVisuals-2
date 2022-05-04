@@ -1,11 +1,11 @@
 
 # Music Visualiser Project
 
-| Course | Name | Student Number |
-|------|--------|------------------|
-|TU856 | Raghd Al Juma | D19125768 |
-|TU856 | Laura Andrews | D21125370 |
-|TU856 | Stephen Moore | D21125383 |
+| Course | Name | Student Number   |       Visual       |
+|------|--------|------------------|--------------------|
+|TU856 | Raghd Al Juma | D19125768 |drawPlanets         |
+|TU856 | Laura Andrews | D21125370 |loadingBar, Speaker |
+|TU856 | Stephen Moore | D21125383 |LandScape           |
 
 
 🐶🐾🎈👻👽🤡🤖  
@@ -27,6 +27,15 @@ These visuals were generated based on knowledge gained in classes or by internet
 
 ## Instructions
 (need to check this) The files for this assignemnt are located in java/src/ie/tudublin of the Music Visuals-2 folder. You can run our assignment from the Main.java file. 
+
+Instructions:
+1. Run Class assignment.java from package D21125383 in Main.java
+2. Music will start playing, wait for loading bar to finish and the first visual(speaker) will play
+3. Once You are done looking at the first visual you an press the key 2
+4. Key 2 will then cause the next visual to play(Planets),you can press down the mouse button to light up the planets , then once done with that visual you can press Key 3
+5. Key 3 will then cause visual 3(Landscape) to play, this visual allows you to move the mouse around to change the color of the stroke 
+of the landscape(land and sphere), then if you press the mouse button you can fill the landscape(land and sphere) and move the mouse to change the color of the landscape
+6. Reapeat instruction 1-5 to do again or you can switch the visuals as you please using the Keys 0-3(0 being the loadingBar,1 being the Speaker, 2 being the Plants and 3 being Landscape) 
 
 ## How it works
 (need to check this) Once the file is ran from the main, a fullscreen processing window is display where the song and a loading bar is displayed. When the loading bar is completed, the first scene is shown.
@@ -89,6 +98,57 @@ void drawPlanet(float s, float g, float size)
         }
     }
  ```   
+the third scene:
+The third scene contains a sphere floating above what I describe as a landscape, to which both will chaange stroke color by moving the mouse around the screen and if the mouse is pressed the shapes will fill and change colour aswell with the stroke if you move around the mouse. 
+
+
+
+
+
+
+
+
+````Java
+ public void LandScape(float amp){//start Landscape
+        land =new float [cols][rows];
+                float yoff = amp;
+                for(int y =0; y < rows;y++){//start for loop y
+                    float xoff = 0;
+                    for(int x =0; x < cols; x++){//start for loop x
+                        land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
+                        xoff +=1;
+                    }//end for loop x
+                    yoff+=amp;
+                }//end for loop y 
+                stroke(map(mouseX, 0, width, 100, 225),map(mouseY, 0, height, 100, 225),0);
+                noFill();
+                if(mousePressed){//start if 
+                    fill(map(mouseY, 0, width, 70, 225),0,map(mouseX, 0, height, 70, 120));
+                }//end if 
+                pushMatrix();
+                translate(width/2, height/2-280);
+                sphere(amp*1000);
+                popMatrix();
+
+                noFill();//make no fill 
+                if(mousePressed){//start if
+                    fill(map(mouseY, 0, width, 70, 120),0,map(mouseX, 0, height, 70, 120)); 
+                }//end if 
+                translate(width/2, height/2);//start to postion land
+                rotateX(PI/2.2f);
+                translate(-w/2, -h/2);//end position land
+                for(int y =0; y < rows-1;y++){//start for loop to get the number of rows 
+                    beginShape(TRIANGLE_STRIP);
+                    for(int x =0; x < cols; x++){ //start for loop to get the number of columns
+                        vertex(x*scale, y*scale,land[x][y]);
+                        vertex(x*scale, (y+1)*scale, land[x][y+1]);
+                    }//end for loop columns
+                    endShape();
+                }//end forloop  rows
+    }//end Landscape
+
+````
+
 
 ## What I am most proud of in the assignment
 
