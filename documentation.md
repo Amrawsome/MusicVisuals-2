@@ -99,27 +99,29 @@ void drawPlanet(float s, float g, float size)
     }
  ```   
 the third scene:
+
 The third scene contains a sphere floating above what I describe as a landscape, to which both will chaange stroke color by moving the mouse around the screen and if the mouse is pressed the shapes will fill and change colour aswell with the stroke if you move around the mouse. 
 
+How the Landscape method works is first it intakes a float amp which is the average amplitude which will be used inside the method. 
 
+Next the stroke is set so the outline of each shape can be seen(the stroke changes with mouse movement), then no fill is called to make sure there is no fill.
 
+If statement is then called so if the mouse is clicked the sphere will fill in and change the fill colour depending on the mouse X and Y.
 
+Placing the sphere comes next so first the Coordinates of the system are saved to the matrix stack then the sphere is translated to the position which is the middle of the screen and moved up above the land, then the previous system coordinates are popped from the stack restoring the coordinates.
 
+Then next the 2d array is called and initialized to col and row which is the used in a nested for loop to utimatley get the z coordinate for the land which is done using noise and map function. 
 
+No fill is then called to strip away the fill from the land and again we have a if statement tat if mouse pressed it will fill land and will change colour with the changing mouse X & Y.
 
+Next the position of land is made using translation and rotation of the X axis, first it has the triangles start at the middle by translation then rotating the X to make the land closer to the view and finally translating the land by minus width and minus height to move it into the middle of the screen.
 
-````Java
+Next we look at how the land is made, this is through using the for loops to make the grid using the x and y coordinates then giving them depth by adding the z coordinate which is worked out earlier in the code as the 2d array, so with the combination of the foor loop and the coordinates to make the traingle strip pattern we have the land.
+
+then this code loops over again in the draw method which constantly updates the shapes which is changing due to the sphere and z coordinate using the average amplitude which is float amp that is put into the method at the start. 
+```Java
  public void LandScape(float amp){//start Landscape
         land =new float [cols][rows];
-                float yoff = amp;
-                for(int y =0; y < rows;y++){//start for loop y
-                    float xoff = 0;
-                    for(int x =0; x < cols; x++){//start for loop x
-                        land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
-                        xoff +=1;
-                    }//end for loop x
-                    yoff+=amp;
-                }//end for loop y 
                 stroke(map(mouseX, 0, width, 100, 225),map(mouseY, 0, height, 100, 225),0);
                 noFill();
                 if(mousePressed){//start if 
@@ -129,11 +131,20 @@ The third scene contains a sphere floating above what I describe as a landscape,
                 translate(width/2, height/2-280);
                 sphere(amp*1000);
                 popMatrix();
-
+                 float yoff = amp;
+                for(int y =0; y < rows;y++){//start for loop y
+                    float xoff = 0;
+                    for(int x =0; x < cols; x++){//start for loop x
+                        land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
+                        xoff +=1;
+                    }//end for loop x
+                    yoff+=amp;
+                }//end for loop y 
                 noFill();//make no fill 
                 if(mousePressed){//start if
                     fill(map(mouseY, 0, width, 70, 120),0,map(mouseX, 0, height, 70, 120)); 
                 }//end if 
+                
                 translate(width/2, height/2);//start to postion land
                 rotateX(PI/2.2f);
                 translate(-w/2, -h/2);//end position land
@@ -147,7 +158,48 @@ The third scene contains a sphere floating above what I describe as a landscape,
                 }//end forloop  rows
     }//end Landscape
 
-````
+```
+```
+ public void LandScape(float amp){//start Landscape
+        land =new float [cols][rows];
+                stroke(map(mouseX, 0, width, 100, 225),map(mouseY, 0, height, 100, 225),0);
+                noFill();
+                if(mousePressed){//start if 
+                    fill(map(mouseY, 0, width, 70, 225),0,map(mouseX, 0, height, 70, 120));
+                }//end if 
+                pushMatrix();
+                translate(width/2, height/2-280);
+                sphere(amp*1000);
+                popMatrix();
+                 float yoff = amp;
+                for(int y =0; y < rows;y++){//start for loop y
+                    float xoff = 0;
+                    for(int x =0; x < cols; x++){//start for loop x
+                        land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
+                        xoff +=1;
+                    }//end for loop x
+                    yoff+=amp;
+                }//end for loop y 
+                noFill();//make no fill 
+                if(mousePressed){//start if
+                    fill(map(mouseY, 0, width, 70, 120),0,map(mouseX, 0, height, 70, 120)); 
+                }//end if 
+                
+                translate(width/2, height/2);//start to postion land
+                rotateX(PI/2.2f);
+                translate(-w/2, -h/2);//end position land
+                for(int y =0; y < rows-1;y++){//start for loop to get the number of rows 
+                    beginShape(TRIANGLE_STRIP);
+                    for(int x =0; x < cols; x++){ //start for loop to get the number of columns
+                        vertex(x*scale, y*scale,land[x][y]);
+                        vertex(x*scale, (y+1)*scale, land[x][y+1]);
+                    }//end for loop columns
+                    endShape();
+                }//end forloop  rows
+    }//end Landscape
+
+```
+
 
 
 ## What I am most proud of in the assignment

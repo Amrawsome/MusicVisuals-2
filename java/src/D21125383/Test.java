@@ -1,7 +1,6 @@
 package D21125383;
 
 import processing.core.PApplet;
-import ie.tudublin.Visual;
 
 public class Test extends PApplet{
 

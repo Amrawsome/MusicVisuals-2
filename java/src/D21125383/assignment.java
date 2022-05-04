@@ -84,43 +84,48 @@ public class assignment extends Visual{
         //end variables for visual methods
     }
     public void LandScape(float amp){//start Landscape
-        land =new float [cols][rows];//2d array
-                float yoff = amp;//make yoff the method input
-                for(int y =0; y < rows;y++){//start for loop y
-                    float xoff = 0;//make xoff =0
-                    for(int x =0; x < cols; x++){//start for loop x
-                        land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
-                        xoff +=1;
-                    }//end for loop x
-                    yoff+=amp;//yoff plus methos input
-                }//end for loop y 
-                stroke(map(mouseX, 0, width, 100, 225),map(mouseY, 0, height, 100, 225),0);//stroke to make outline color
-                noFill();//make the shape have no fill
-                if(mousePressed){//start if 
-                    fill(map(mouseY, 0, width, 70, 225),0,map(mouseX, 0, height, 70, 120));//fill sphere 
-                }//end if 
-                pushMatrix();
-                translate(width/2, height/2-280);//position sphere
-                sphere(amp*1000);//make sphere using size and method input
-                popMatrix();
+        stroke(map(mouseX, 0, width, 100, 225),map(mouseY, 0, height, 100, 225),0);//stroke to make outline color
+        noFill();//make the shape have no fill
+        //mouse press to fill color
+        if(mousePressed){//start if 
+            fill(map(mouseY, 0, width, 70, 225),0,map(mouseX, 0, height, 70, 120));//fill sphere 
+        }//end if 
+        //draw sphere
+        pushMatrix();
+        translate(width/2, height/2-280);//position sphere
+        sphere(amp*1000);//make sphere using size and method input
+        popMatrix();
+        //setup land
 
-                noFill();//make no fill 
-                if(mousePressed){//start if
-                    fill(map(mouseY, 0, width, 70, 120),0,map(mouseX, 0, height, 70, 120));//fill land 
-                }//end if 
-                translate(width/2, height/2);//start to postion land
-                rotateX(PI/2.2f);
-                translate(-w/2, -h/2);//end position land
-                for(int y =0; y < rows-1;y++){//start for loop to get the number of rows 
-                    beginShape(TRIANGLE_STRIP);//begins the shape
-                    for(int x =0; x < cols; x++){ //start for loop to get the number of columns
-                        vertex(x*scale, y*scale,land[x][y]);//draw vertex
-                        vertex(x*scale, (y+1)*scale, land[x][y+1]);//draw vertex
-                    }//end for loop columns
-                    endShape();//end shape
-                }//end forloop  rows
+        land =new float [cols][rows];//2d array
+        float yoff = amp;//make yoff the method input
+        for(int y =0; y < rows;y++){//start for loop y
+            float xoff = 0;//make xoff =0
+            for(int x =0; x < cols; x++){//start for loop x
+                land[x][y] =map(noise(xoff, yoff),0,1,-50,50) ;
+                xoff +=1;
+            }//end for loop x
+            yoff+=amp;//yoff plus methos input
+        }//end for loop y 
+
+        noFill();//make no fill
+        //fill  
+        if(mousePressed){//start if
+            fill(map(mouseY, 0, width, 70, 120),0,map(mouseX, 0, height, 70, 120));//fill land 
+        }//end if 
+        translate(width/2, height/2);//start to postion land
+        rotateX(PI/2.2f);
+        translate(-w/2, -h/2);//end position land
+        for(int y =0; y < rows-1;y++){//start for loop to get the number of rows 
+            beginShape(TRIANGLE_STRIP);//begins the shape
+            for(int x =0; x < cols; x++){ //start for loop to get the number of columns
+                vertex(x*scale, y*scale,land[x][y]);//draw vertex
+                vertex(x*scale, (y+1)*scale, land[x][y+1]);//draw vertex
+            }//end for loop columns
+            endShape();//end shape
+        }//end forloop  rows
     }//end Landscape
-     void loadingBar(){
+    void loadingBar(){
         //progress bar
         background(0);
         per = (float) ((per + 0.16) % 100); 
@@ -236,23 +241,25 @@ public class assignment extends Visual{
         switch (mode) {//start switch
 			case 0:
             {
-                 //progress bar
-                 background(0);
+                //progress bar
+                noCursor();
+                background(0);
                 loadingBar();
-                 if(per >= 99.6f){
+                if(per >= 99.6f){
                     mode=1;
                 }
                 break;
             }
             case 1:
             {
-                 // like a speaker circle thingy
+                // like a speaker circle thingy
                 background(0);
                 speaker();
                 break;  
             }
             case 2:
             {
+                noCursor();
                 background(0); 
                 //print instructions on screen
                 textSize((float)(25));	
@@ -268,6 +275,7 @@ public class assignment extends Visual{
 
             case 3:
             {//start case
+                noCursor();//removesCuror
                 background(0);//set background to black
                 textSize((float)(25));//sets the size of text	
                 fill(200, 140); //fills text
