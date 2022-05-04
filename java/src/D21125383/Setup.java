@@ -1,4 +1,4 @@
-package ie.tudublin;
+package D21125383;
 import processing.core.PApplet;
 import ddf.minim.*;
 import ddf.minim.analysis.FFT;
@@ -6,7 +6,7 @@ import ddf.minim.analysis.FFT;
 
 
 public class Setup extends PApplet {
-    
+    Assignment agmt;
      // pause/play key
      int mode = 0;
      int cols;
@@ -63,7 +63,6 @@ public class Setup extends PApplet {
         cols =w/scale;
         rows=h/scale;
         lerpedBuffer = new float[width];
-
 	}
 
     public void startMinim() 
@@ -82,17 +81,17 @@ public class Setup extends PApplet {
 	}
     
 
-    // public void calculateAverageAmplitude()
-	// {
-    //     for(int i = 0 ; i < audioBuffer.size() ; i ++)
-    //     {
-    //         sum += abs(audioBuffer.get(i));
-    //         lerpedBuffer[i] = lerp(lerpedBuffer[i], audioBuffer.get(i), 0.05f);
-    //     }
-    //     average= sum / (float) getAudioBuffer().size();
+    public void calculateAverageAmplitude()
+	{
+        for(int i = 0 ; i < audioBuffer.size() ; i ++)
+        {
+            sum += abs(audioBuffer.get(i));
+            lerpedBuffer[i] = lerp(lerpedBuffer[i], audioBuffer.get(i), 0.05f);
+        }
+        average= sum / (float) getAudioBuffer().size();
 
-    //     smoothedAmplitude = lerp(smoothedAmplitude, average, 0.01f);
-	//}
+        smoothedAmplitude = lerp(smoothedAmplitude, average, 0.01f);
+	}
 
     public void Stephen(float q){
         land =new float [cols][rows];
@@ -107,10 +106,10 @@ public class Setup extends PApplet {
                 }
                 
                 
-                stroke(map(mouseX, 0, width, 50, 225),map(mouseY, 0, height, 50, 225),0);
+                stroke(map(mouseX, 0, width, 100, 225),map(mouseY, 0, height, 100, 225),0);
                 noFill(); 
                 if(mousePressed){
-                    fill(map(mouseX, 0, width, 50, 225),map(mouseY, 0, height, 50, 225),0);
+                    fill(map(mouseY, 0, width, 70, 225),0,map(mouseX, 0, height, 70, 120));
                 } 
                 pushMatrix();
                 translate(width/2, height/2-280);
@@ -119,7 +118,7 @@ public class Setup extends PApplet {
 
                 noFill(); 
                 if(mousePressed){
-                    fill(map(mouseX, 0, width, 50, 225),map(mouseY, 0, height, 50, 225),0);
+                    fill(map(mouseY, 0, width, 70, 120),0,map(mouseX, 0, height, 70, 120));
                 } 
                 translate(width/2, height/2);
                 rotateX(PI/2.2f);
@@ -385,13 +384,13 @@ public class Setup extends PApplet {
         this.value = value;
     }
 
-    public float[] getLerpedBuffer() {
-        return lerpedBuffer;
-    }
+    // public float[] getLerpedBuffer() {
+    //     return lerpedBuffer;
+    // }
 
-    public void setLerpedBuffer(float[] lerpedBuffer) {
-        this.lerpedBuffer = lerpedBuffer;
-    }
+    // public void setLerpedBuffer(float[] lerpedBuffer) {
+    //     this.lerpedBuffer = lerpedBuffer;
+    //}
 
     public float[][] getLand() {
         return land;
