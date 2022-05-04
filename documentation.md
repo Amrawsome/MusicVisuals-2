@@ -197,8 +197,10 @@ then this code loops over again in the draw method which constantly updates the 
                     endShape();
                 }//end forloop  rows
     }//end Landscape
-
 ```
+Scene 3 Pictures:
+![LandScape Versions Imgur](https://imgur.com/a/qbZB6HV)
+
 
 
 

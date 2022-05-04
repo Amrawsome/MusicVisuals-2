@@ -64,7 +64,7 @@ public class assignment extends Visual{
     //set to fullscreen with P3D renderer
     public void settings()
     {
-        fullScreen(P3D, SPAN);
+        fullScreen(P3D,SPAN);
     }
 
     public void setup()
@@ -269,7 +269,7 @@ public class assignment extends Visual{
                 drawPlanet(widthH+200, halfH, size);
                 drawPlanet(widthH-200, halfH/2, size* 0.3f);
                 drawPlanet(widthH-50, halfH, size*0.5f);    
-                 break;
+                break;
                 
             }
 
