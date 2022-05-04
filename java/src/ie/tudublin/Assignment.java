@@ -1,5 +1,7 @@
 package ie.tudublin;
 
-public class Assignment {
+import processing.core.PApplet;
+
+public class Assignment extends PApplet {
     
 }

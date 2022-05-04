@@ -53,7 +53,7 @@ public class assignment extends PApplet{
     {
         //load music and play
         minim = new Minim(this);
-        audioPlayer = minim.loadFile("Heaven.mp3", 1024);
+        audioPlayer = minim.loadFile("differentheaven.mp3", 1024);
         audioPlayer.play();
         audioBuffer = audioPlayer.mix;
 

@@ -1,19 +1,20 @@
 package ie.tudublin;
-import D21125383.Test;
-import example.CubeVisual;
-import example.MyVisual;
-import example.RotatingAudioBands;
 
 public class Main
 {	
-
-	public static void startUI()
+	public static void Assignment()
 	{
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new MyVisual());		
+        processing.core.PApplet.runSketch( a, new Assignment());		
 	}
 
-	public static void assignment()
+	public static void assignmentRaghd()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new D19125768.assignment());		
+	}
+
+	public static void assignmentStephen()
 	{
 		String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new D21125383.assignment());		
@@ -27,8 +28,10 @@ public class Main
 
 	public static void main(String[] args)
 	{
-		//assignment();
-		assignmentLaura();
+		//Assignment();
+		//assignmentLaura();
+		assignmentStephen();
+		//assignmentRaghd();
 
 	}
 
