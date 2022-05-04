@@ -27,7 +27,7 @@ public class assignment extends Setup{
 
 
 
-    Random rand = new Random(123456789L);
+    //Random rand = new Random(123456789L);
     int cols;
     int rows;
     int scale =20;

@@ -122,9 +122,38 @@ public class Setup extends PApplet {
 
     
 
+    public float[] getSmoothedBands() {
+        return smoothedBands;
+    }
 
+    public void setSmoothedBands(float[] smoothedBands) {
+        this.smoothedBands = smoothedBands;
+    }
+
+    public FFT getFft() {
+        return fft;
+    }
+
+    public void setFft(FFT fft) {
+        this.fft = fft;
+    }
    
+    public AudioPlayer getAudioPlayer() {
+        return audioPlayer;
+    }
 
+    public void setAudioPlayer(AudioPlayer audioPlayer) {
+        this.audioPlayer = audioPlayer;
+    }
+
+    public AudioBuffer getAudioBuffer() {
+        return audioBuffer;
+    }
+
+    public void setAudioBuffer(AudioBuffer audioBuffer) {
+        this.audioBuffer = audioBuffer;
+    }
+    
 	public void loadAudio(String filename)
 	{
 		audioPlayer = minim.loadFile(filename, frameSize);
