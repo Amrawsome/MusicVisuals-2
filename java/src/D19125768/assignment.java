@@ -146,16 +146,6 @@ public class assignment extends PApplet{
                 break;
             }
             
-            case 1:
-            {
-
-                break;
-            }
-
-            case 2:
-            {
-                break;
-            }
         }
     }
 

@@ -17,7 +17,7 @@ public class Main
 	public static void assignmentStephen()
 	{
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new D21125383.assignment());		
+        processing.core.PApplet.runSketch( a, new D21125383.assignmentBackup());		
 	}
 
 	public static void assignmentLaura()

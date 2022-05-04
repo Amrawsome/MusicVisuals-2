@@ -41,21 +41,7 @@ public class assignmentSetup extends PApplet {
 	private AudioPlayer audioPlayer;
 	private AudioBuffer audioBuffer;
 	private FFT fft;
-     //laura
-     // for speaker circle thingy
-     
- 
-     // for progress bar
-    
-     
- 
-     //end laura
 
-    //stephen
-   
-    
-   
-    //end stephen
     public void setup(){
         colorMode(RGB);
         y = height / 2;
@@ -128,9 +114,8 @@ public class assignmentSetup extends PApplet {
                 } 
     }
    
-    
 
-     void loadingBar(){
+    public void loadingBar(){
         //progress bar
         background(0);
         per = (float) ((per + 0.15) % 100); 
@@ -144,7 +129,7 @@ public class assignmentSetup extends PApplet {
     }
 
 
-    void speaker(){
+    public void speaker(){
          // like a speaker circle thingy
          noCursor();
          smooth();
@@ -185,9 +170,9 @@ public class assignmentSetup extends PApplet {
     }
 
     //draw planet method 
-    void drawPlanet(float s, float g, float size) 
+    public void drawPlanet(float s, float g, float size) 
     { 
-       background(0);
+
         //map audio buffer size
         float n = map(20, 0, audioBuffer.size(), 0, 255);
         translate(s, g);
