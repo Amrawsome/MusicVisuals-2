@@ -6,8 +6,7 @@ import ddf.minim.analysis.FFT;
 
 
 
-public class Setup extends PApplet {
-
+public class assignmentSetup extends PApplet {
      // pause/play key
      int mode = 0;
      int cols;
@@ -42,8 +41,21 @@ public class Setup extends PApplet {
 	private AudioPlayer audioPlayer;
 	private AudioBuffer audioBuffer;
 	private FFT fft;
+     //laura
+     // for speaker circle thingy
      
+ 
+     // for progress bar
+    
+     
+ 
+     //end laura
 
+    //stephen
+   
+    
+   
+    //end stephen
     public void setup(){
         colorMode(RGB);
         y = height / 2;
@@ -62,11 +74,7 @@ public class Setup extends PApplet {
 		bands = new float[(int) log2(frameSize)];
   		smoothedBands = new float[bands.length];
 
-	}
-    
-    float log2(float f) {
-		return log(f) / log(2.0f);
-	}
+	}    
 
     public void calculateAverageAmplitude()
 	{
@@ -119,8 +127,121 @@ public class Setup extends PApplet {
                     endShape();
                 } 
     }
-
+   
     
+
+     void loadingBar(){
+        //progress bar
+        background(0);
+        per = (float) ((per + 0.15) % 100); 
+        //System.out.println(per);
+        textSize(30);
+        fill(255);
+        text("Loading ... " + per + " %", SX / 4, (float) (SY / 2.5));
+        rect(SX / 4, SY / 2, per * 2, 20, 7); 
+        //System.out.println(per);
+        
+    }
+
+
+    void speaker(){
+         // like a speaker circle thingy
+         noCursor();
+         smooth();
+         background (0);
+         frameRate(24);
+
+         fill(0,50);  
+         noStroke();
+         rect(0, 0, width, height);
+         translate(width/2, height/2);
+         
+         for (int i = 0; i < audioPlayer.bufferSize() - 1; i++) {
+         
+             float angle = sin(i+n4)* 10; 
+             float angle2 = sin(i+n6)* 300; 
+             
+             float x = sin(radians(i))*(angle2+30); 
+             float y = cos(radians(i))*(angle2+30);
+             
+             float x3 = sin(radians(i))*(500/angle); 
+             float y3 = cos(radians(i))*(500/angle);
+             
+             fill(128,0,128); // purple
+             ellipse(x, y, audioPlayer.left.get(i)*10, audioPlayer.left.get(i)*10);
+             
+             fill(255,255,255); // white
+             rect(x3, y3, audioPlayer.left.get(i)*20, audioPlayer.left.get(i)*10);
+             
+             fill(186,85,211); // medium orchid
+             rect(x, y, audioPlayer.right.get(i)*10, audioPlayer.left.get(i)*10);
+             
+             fill(255,255,255); // white
+             rect(x3, y3, audioPlayer.right.get(i)*10, audioPlayer.right.get(i)*20);
+         }  
+
+         n4 += 0.008;
+         n6 += 0.04;
+    }
+
+    //draw planet method 
+    void drawPlanet(float s, float g, float size) 
+    { 
+       background(0);
+        //map audio buffer size
+        float n = map(20, 0, audioBuffer.size(), 0, 255);
+        translate(s, g);
+        if(mousePressed)
+        {
+            lights();
+        }
+        
+        ambientLight(100, n, 255);
+        
+        //rotate planet on x, y , z axis
+        rotateY((float) (frameCount/100.0));
+        rotateX((float) (frameCount/50.0));
+        rotateZ((float) (frameCount/50.0));
+
+        //fill
+        fill(100);
+        noStroke();
+
+        //draw sphere
+        sphere(size);
+
+        //loop through buffer and draw the hoops around the planet
+        for(int i = 0 ; i < audioBuffer.size()/2 ; i ++)
+        {
+            
+            float c = map(i, 0, audioBuffer.size(), 0, 255);
+            float f = lerpedBuffer[i] * height/2 * 4.0f;
+
+            noStroke();
+            
+            //rotate the hoops around planet
+            rotate(c);
+            fill(s, f, c);
+
+            //draw hoops
+            circle(f*0.6f , i, f*0.4f);
+            circle(f * 0.8f, i, f *0.4f);  
+        }
+    }
+   
+
+	// NEEDED
+    public float getPer() {
+        return per;
+    }
+
+    public void setPer(float per) {
+        this.per = per;
+    }
+
+    float log2(float f) {
+		return log(f) / log(2.0f);
+	}
 
     public float[] getSmoothedBands() {
         return smoothedBands;
@@ -160,8 +281,8 @@ public class Setup extends PApplet {
 		audioBuffer = audioPlayer.mix;
 	}
 
-    
+   
+
     
 }
-
 

@@ -74,12 +74,7 @@ public class Setup extends PApplet {
 		bands = new float[(int) log2(frameSize)];
   		smoothedBands = new float[bands.length];
 
-	}
-
-    float log2(float f) {
-		return log(f) / log(2.0f);
-	}
-    
+	}    
 
     public void calculateAverageAmplitude()
 	{
@@ -234,179 +229,10 @@ public class Setup extends PApplet {
     }
    
 
-	public void loadAudio(String filename)
-	{
-		audioPlayer = minim.loadFile(filename, frameSize);
-		audioBuffer = audioPlayer.mix;
+	// NEEDED
+    float log2(float f) {
+		return log(f) / log(2.0f);
 	}
-
-    public int getMode() {
-        return mode;
-    }
-
-    public void setMode(int mode) {
-        this.mode = mode;
-    }
-
-    public int getCols() {
-        return cols;
-    }
-
-    public void setCols(int cols) {
-        this.cols = cols;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
-
-    public int getScale() {
-        return scale;
-    }
-
-    public void setScale(int scale) {
-        this.scale = scale;
-    }
-
-    public int getW() {
-        return w;
-    }
-
-    public void setW(int w) {
-        this.w = w;
-    }
-
-    public int getH() {
-        return h;
-    }
-
-    public void setH(int h) {
-        this.h = h;
-    }
-
-    public int getSX() {
-        return SX;
-    }
-
-    public int getSY() {
-        return SY;
-    }
-
-    public int getFrameSize() {
-        return frameSize;
-    }
-
-    public void setFrameSize(int frameSize) {
-        this.frameSize = frameSize;
-    }
-
-    public int getSampleRate() {
-        return sampleRate;
-    }
-
-    public void setSampleRate(int sampleRate) {
-        this.sampleRate = sampleRate;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getSmoothedY() {
-        return smoothedY;
-    }
-
-    public void setSmoothedY(float smoothedY) {
-        this.smoothedY = smoothedY;
-    }
-
-    public float getSmoothedAmplitude() {
-        return smoothedAmplitude;
-    }
-
-    public void setSmoothedAmplitude(float smoothedAmplitude) {
-        this.smoothedAmplitude = smoothedAmplitude;
-    }
-
-    public float getOff() {
-        return off;
-    }
-
-    public void setOff(float off) {
-        this.off = off;
-    }
-
-    public float getN4() {
-        return n4;
-    }
-
-    public void setN4(float n4) {
-        this.n4 = n4;
-    }
-
-    public float getN6() {
-        return n6;
-    }
-
-    public void setN6(float n6) {
-        this.n6 = n6;
-    }
-
-    public float getPer() {
-        return per;
-    }
-
-    public void setPer(float per) {
-        this.per = per;
-    }
-
-    public float getAverage() {
-        return average;
-    }
-
-    public void setAverage(float average) {
-        this.average = average;
-    }
-
-    public float getValue() {
-        return value;
-    }
-
-    public void setValue(float value) {
-        this.value = value;
-    }
-
-    // public float[] getLerpedBuffer() {
-    //     return lerpedBuffer;
-    // }
-
-    // public void setLerpedBuffer(float[] lerpedBuffer) {
-    //     this.lerpedBuffer = lerpedBuffer;
-    //}
-
-    public float[][] getLand() {
-        return land;
-    }
-
-    public void setLand(float[][] land) {
-        this.land = land;
-    }
-
-    public float[] getBands() {
-        return bands;
-    }
-
-    public void setBands(float[] bands) {
-        this.bands = bands;
-    }
 
     public float[] getSmoothedBands() {
         return smoothedBands;
@@ -416,14 +242,14 @@ public class Setup extends PApplet {
         this.smoothedBands = smoothedBands;
     }
 
-    public Minim getMinim() {
-        return minim;
+    public FFT getFft() {
+        return fft;
     }
 
-    public void setMinim(Minim minim) {
-        this.minim = minim;
+    public void setFft(FFT fft) {
+        this.fft = fft;
     }
-
+   
     public AudioPlayer getAudioPlayer() {
         return audioPlayer;
     }
@@ -439,14 +265,12 @@ public class Setup extends PApplet {
     public void setAudioBuffer(AudioBuffer audioBuffer) {
         this.audioBuffer = audioBuffer;
     }
-
-    public FFT getFft() {
-        return fft;
-    }
-
-    public void setFft(FFT fft) {
-        this.fft = fft;
-    }
+    
+	public void loadAudio(String filename)
+	{
+		audioPlayer = minim.loadFile(filename, frameSize);
+		audioBuffer = audioPlayer.mix;
+	}
 
    
 
