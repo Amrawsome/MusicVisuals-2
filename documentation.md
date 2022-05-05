@@ -202,7 +202,7 @@ then this code loops over again in the draw method which constantly updates the 
     }//end Landscape
 
 ```
-``` Java
+```
  public void LandScape(float amp){//start Landscape
         land =new float [cols][rows];
                 stroke(map(mouseX, 0, width, 100, 225),map(mouseY, 0, height, 100, 225),0);
