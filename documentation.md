@@ -20,28 +20,67 @@
 
 🎶 
 
+
 ## Description of the assignment
 The music visuals assignment, a program that works on visual graphics based on a pre-loaded audio. In our project, there is three scenes created by each member of the group in which each of us created visuals that react to the choosen song, "Different Heaven & EH!DE - My Heart [NCS Release]". 
 
-These visuals were generated based on knowledge gained in classes or by internet research. Among the three scenes there are elements that are responive to the sound either by changing colours, shapes, or size. 
+These visuals were generated based on knowledge gained in classes or by internet research. Among the three scenes there are visuals that are responive to the sound either by changing colours, shapes, or size. 
+
+[![Assignment Youtube Video :)](https://youtu.be/F7gyWsme9B0)](https://www.youtube.com/watch?v=F7gyWsme9B0)
 
 ## Instructions
-(need to check this) The files for this assignemnt are located in java/src/ie/tudublin of the Music Visuals-2 folder. You can run our assignment from the Main.java file. 
+The files for this assignemnt are located in java/src/D21125383 of the Music Visuals-2 folder. You can run our assignment from the Main.java file located in ie/tudublin. 
 
-Instructions:
-1. Run Class assignment.java from package D21125383 in Main.java
+***Instructions:***
+1. Run file assignment.java from package D21125383 in Main.java
 2. Music will start playing, wait for loading bar to finish and the first visual(speaker) will play
-3. Once You are done looking at the first visual you an press the key 2
+3. Once you are done looking at the first visual you an press the key 2
 4. Key 2 will then cause the next visual to play(Planets),you can press down the mouse button to light up the planets , then once done with that visual you can press Key 3
 5. Key 3 will then cause visual 3(Landscape) to play, this visual allows you to move the mouse around to change the color of the stroke 
 of the landscape(land and sphere), then if you press the mouse button you can fill the landscape(land and sphere) and move the mouse to change the color of the landscape
-6. Reapeat instruction 1-5 to do again or you can switch the visuals as you please using the Keys 0-3(0 being the loadingBar,1 being the Speaker, 2 being the Plants and 3 being Landscape) 
+6. Reapeat instruction 1-5 to do again or you can switch the visuals as you please using the Keys 0-3 (0 being the loadingBar,1 being the Speaker, 2 being the Plants and 3 being Landscape) 
 
 ## How it works
-(need to check this) Once the file is ran from the main, a fullscreen processing window is display where the song and a loading bar is displayed. When the loading bar is completed, the first scene is shown.
+Once the file is ran from the main, a fullscreen processing window is display where the song begins playing and a loading bar is displayed. When the loading bar is completed, the first scene is shown automatically. To see the second scene, press *num2*, and to see the third scene, press *num3*.
+
+***The first scene:***
+
+![Scene 1](java/data/scene1.png)
+
+The first scene shows what I would describe as a speaker. The visual reacts to the audio being played, if the song goes a little quiet then the speaker retreates to the middle circle so there no colour or moving elements. When the song gets louder the colours return and the elements move outward from the circle. Calculated angles are used to help map the movements of the elements, I used the declared variables n4 and n6 as a starting point.
+
+Code for the angles:
+```Java
+float angle = sin(i+n4)* 10; 
+float angle2 = sin(i+n6)* 300; 
+                        
+float x = sin(radians(i))*(angle2+30); 
+float y = cos(radians(i))*(angle2+30);
+                        
+float x3 = sin(radians(i))*(500/angle); 
+float y3 = cos(radians(i))*(500/angle);
+``` 
+The colours I chose for my visual were purple, medium orchid, and white to help break the purple colours. The purple colours raditated in and out from the middle in a circle shape and the white colour radiated in and out, like mulitple diagonal lines from the middle to the edge of a rectangle.
+
+Code for the shapes/movement:
+```Java
+fill(128,0,128); // purple
+ellipse(x, y, heaven.left.get(i)*10, heaven.left.get(i)*10);
+                        
+fill(255,255,255); // white
+rect(x3, y3, heaven.left.get(i)*20, heaven.left.get(i)*10);
+                        
+fill(186,85,211); // medium orchid
+rect(x, y, heaven.right.get(i)*10, heaven.left.get(i)*10);
+                        
+fill(255,255,255); // white
+rect(x3, y3, heaven.right.get(i)*10, heaven.right.get(i)*20);
+``` 
 
 
-The second scene:
+***The second scene:***
+
+![Scene 2](java/data/scene2.png)
 
 The second scene has 3 *crazy* planets which rotate around themselves/each other. Around the planets are hoops that consist of small circles , these hoops change size and color depending of the music played, they also rotate around the planet.
 
@@ -50,6 +89,7 @@ In the drawPlanet method, the method takes in three parameters (x , y position o
 Also to make the planet rotate, the rotateX, rotateY, rotateZ functions are used and to draw the planet I used sphere() function.The hoop are drawn using for loop and circles as well as the rotate function. 
 
 rotate speed depends on the mapped value of i in for loop from 0 to the size of the audio buffer. and the circles size and position on the x axis depends on the value in the lerpedBuffer array list.
+
 The code:
 ```Java
 void drawPlanet(float s, float g, float size) 
@@ -98,7 +138,10 @@ void drawPlanet(float s, float g, float size)
         }
     }
  ```   
-the third scene:
+
+***The third scene:***
+
+![Scene 3](java/data/scene3.png)
 
 The third scene contains a sphere floating above what I describe as a landscape, to which both will chaange stroke color by moving the mouse around the screen and if the mouse is pressed the shapes will fill and change colour aswell with the stroke if you move around the mouse. 
 
@@ -159,7 +202,7 @@ then this code loops over again in the draw method which constantly updates the 
     }//end Landscape
 
 ```
-```
+``` Java
  public void LandScape(float amp){//start Landscape
         land =new float [cols][rows];
                 stroke(map(mouseX, 0, width, 100, 225),map(mouseY, 0, height, 100, 225),0);
@@ -201,78 +244,8 @@ then this code loops over again in the draw method which constantly updates the 
 Scene 3 Pictures:
 [(https://imgur.com/a/qbZB6HV)]
 
-Youtube Video:
-[(https://youtu.be/F7gyWsme9B0)]
-
-
 
 ## What I am most proud of in the assignment
 
-## Markdown Tutorial
 
-This is *emphasis*
-
-This is a bulleted list
-
-- Item
-- Item
-
-This is a numbered list
-
-1. Item
-1. Item
-
-This is a [hyperlink](http://bryanduggan.org)
-
-# Headings
-## Headings
-#### Headings
-##### Headings
-
-This is code:
-
-```Java
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-So is this without specifying the language:
-
-```
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-This is an image using a relative URL:
-
-![An image](images/p8.png)
-
-This is an image using an absolute URL:
-
-![A different image](https://bryanduggandotorg.files.wordpress.com/2019/02/infinite-forms-00045.png?w=595&h=&zoom=2)
-
-This is a youtube video:
-
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
-
-This is a table:
-
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
 

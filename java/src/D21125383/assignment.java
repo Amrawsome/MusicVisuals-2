@@ -25,7 +25,7 @@ public class assignment extends Visual{
     //end Raghd
 
     //laura
-    // for speaker circle thingy
+    // for speaker thingy
     float n4;
     float n6;
     // for progress bar
@@ -164,7 +164,7 @@ public class assignment extends Visual{
             fill(255,255,255); // white
             rect(x3, y3, audioPlayer.left.get(i)*20, audioPlayer.left.get(i)*10);
             
-            fill(186,85,211); // medium orchid
+            fill(255, 51,255); // pink
             rect(x, y, audioPlayer.right.get(i)*10, audioPlayer.left.get(i)*10);
             
             fill(255,255,255); // white
@@ -251,7 +251,7 @@ public class assignment extends Visual{
             }
             case 1:
             {
-                // like a speaker circle thingy
+                // like a speaker thingy
                 background(0);
                 speaker();
                 break;  
