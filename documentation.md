@@ -199,13 +199,10 @@ then this code loops over again in the draw method which constantly updates the 
     }//end Landscape
 ```
 Scene 3 Pictures:
-![LandScape Versions Imgur](https://imgur.com/a/qbZB6HV)
-
-
-
+[(https://imgur.com/a/qbZB6HV)]
 
 Youtube Video:
-![Java Visuals(OOP-Assignment-2022)]()
+[(https://youtu.be/F7gyWsme9B0)]
 
 
 
