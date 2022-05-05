@@ -207,7 +207,7 @@ Youtube Video:
 
 
 ## What I am most proud of in the assignment
-
+What I am most proud of in the assignment is the knowledge I gained from outside study that thought me how to use new things like translate, pop and push matrix etc and how this helped me to be more creative.  
 ## Markdown Tutorial
 
 This is *emphasis*
