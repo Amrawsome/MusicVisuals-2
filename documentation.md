@@ -26,7 +26,7 @@ The music visuals assignment, a program that works on visual graphics based on a
 
 These visuals were generated based on knowledge gained in classes or by internet research. Among the three scenes there are visuals that are responive to the sound either by changing colours, shapes, or size. 
 
-[![Assignment Youtube Video :)](https://youtu.be/F7gyWsme9B0)](https://www.youtube.com/watch?v=F7gyWsme9B0)
+[![Assignment Youtube Video :)](https://youtu.be/Pp4pcAGEiV0)](https://www.youtube.com/watch?v=Pp4pcAGEiV0)
 
 ## Instructions
 The files for this assignemnt are located in java/src/D21125383 of the Music Visuals-2 folder. You can run our assignment from the Main.java file located in ie/tudublin. 
