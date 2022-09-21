@@ -87,3 +87,4 @@ This is a table:
 |Some stuff | Some more stuff in this column |
 |Some stuff | Some more stuff in this column |
 
+# MusicVisualsProject_local
